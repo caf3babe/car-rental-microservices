@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>at.ac.fhcampuswien.se.group1</groupId>
+  <artifactId>car-rental-microservices</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>car-rental-microservices</name>
+  <url>http://maven.apache.org</url>
+
+  <modules>
+    <module>spring-gateway</module>
+    <module>car-service</module>
+    <!-- here go other modules -->
+    <!-- just add an entry for that and let intellij automagically create it for you with option + enter -->
+  </modules>
+
+  <developers>
+    <developer>
+      <name>Nichil Strasser</name>
+      <email>nichil.strasser@stud.fh-campuswien.ac.at</email>
+      <organization>FH Campus Wien</organization>
+      <organizationUrl>https://www.fh-campuswien.ac.at/</organizationUrl>
+    </developer>
+  </developers>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
