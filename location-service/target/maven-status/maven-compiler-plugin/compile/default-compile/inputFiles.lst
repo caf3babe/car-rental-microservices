@@ -1,0 +1,12 @@
+/home/david/GIT/private/car-rental-microservices/location-service/src/main/java/at/ac/fhcampuswien/se/group1/controller/LocationController.java
+/home/david/GIT/private/car-rental-microservices/location-service/src/main/java/at/ac/fhcampuswien/se/group1/models/Location.java
+/home/david/GIT/private/car-rental-microservices/location-service/src/main/java/at/ac/fhcampuswien/se/group1/repositories/LocationRepository.java
+/home/david/GIT/private/car-rental-microservices/location-service/src/main/java/at/ac/fhcampuswien/se/group1/domain/mapper/LocationMapper.java
+/home/david/GIT/private/car-rental-microservices/location-service/src/main/java/at/ac/fhcampuswien/se/group1/models/Response.java
+/home/david/GIT/private/car-rental-microservices/location-service/src/main/java/at/ac/fhcampuswien/se/group1/domain/exception/LocationNotFoundException.java
+/home/david/GIT/private/car-rental-microservices/location-service/src/main/java/at/ac/fhcampuswien/se/group1/domain/exception/OpeningHoursNotFoundException.java
+/home/david/GIT/private/car-rental-microservices/location-service/src/main/java/at/ac/fhcampuswien/se/group1/models/ApiError.java
+/home/david/GIT/private/car-rental-microservices/location-service/src/main/java/at/ac/fhcampuswien/se/group1/services/LocationService.java
+/home/david/GIT/private/car-rental-microservices/location-service/src/main/java/at/ac/fhcampuswien/se/group1/domain/dto/UpdateLocationRequest.java
+/home/david/GIT/private/car-rental-microservices/location-service/src/main/java/at/ac/fhcampuswien/se/group1/domain/dto/CreateLocationRequest.java
+/home/david/GIT/private/car-rental-microservices/location-service/src/main/java/at/ac/fhcampuswien/se/group1/LocationServiceMain.java

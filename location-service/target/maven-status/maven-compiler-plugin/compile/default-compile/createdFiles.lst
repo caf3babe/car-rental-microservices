@@ -1,0 +1,12 @@
+at/ac/fhcampuswien/se/group1/repositories/LocationRepository.class
+at/ac/fhcampuswien/se/group1/controller/LocationController.class
+at/ac/fhcampuswien/se/group1/services/LocationService.class
+at/ac/fhcampuswien/se/group1/domain/dto/CreateLocationRequest.class
+at/ac/fhcampuswien/se/group1/domain/exception/LocationNotFoundException.class
+at/ac/fhcampuswien/se/group1/domain/mapper/LocationMapper.class
+at/ac/fhcampuswien/se/group1/models/Response.class
+at/ac/fhcampuswien/se/group1/domain/dto/UpdateLocationRequest.class
+at/ac/fhcampuswien/se/group1/models/Location.class
+at/ac/fhcampuswien/se/group1/models/ApiError.class
+at/ac/fhcampuswien/se/group1/LocationServiceMain.class
+at/ac/fhcampuswien/se/group1/domain/exception/OpeningHoursNotFoundException.class
