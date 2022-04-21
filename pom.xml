@@ -23,6 +23,7 @@
         <module>spring-gateway</module>
         <module>car-service</module>
         <module>currency-service</module>
+        <module>configuration-server</module>
         <!-- here go other modules -->
         <!-- just add an entry for that and let intellij automagically create it for you with option + enter -->
     </modules>
@@ -53,11 +54,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
         <dependency>
