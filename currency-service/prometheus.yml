@@ -6,9 +6,6 @@ scrape_configs:
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: ['192.168.0.73:8080'] # use your IP -> TODO generic value
-  - job_name: 'configuration-server'
-    metrics_path: '/actuator/prometheus'
-    static_configs:
-      - targets: ['192.168.0.73:8071'] # use your IP -> TODO generic value
+
 
 # add remaining scrape_configs for location-service, car-service, order-service and opening-hours-service

@@ -16,14 +16,18 @@
     </parent>
 
     <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <java.version>17</java.version>
+        <spring-cloud.version>2021.0.1</spring-cloud.version>
     </properties>
 
     <modules>
         <module>spring-gateway</module>
         <module>car-service</module>
         <module>currency-service</module>
-        <module>configuration-server</module>
+        <module>configuration-service</module>
+        <module>discovery-service</module>
         <!-- here go other modules -->
         <!-- just add an entry for that and let intellij automagically create it for you with option + enter -->
     </modules>
