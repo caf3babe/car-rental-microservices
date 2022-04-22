@@ -24,3 +24,9 @@ hs_err_pid*
 
 /.idea/
 **/*.iml
+
+**/.mvn
+**/mvnw.cmd
+**/mvnw
+
+**/target
