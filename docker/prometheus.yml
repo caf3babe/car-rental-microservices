@@ -6,18 +6,22 @@ scrape_configs:
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: ['192.168.0.73:8080'] # use your IP -> TODO use container
+
   - job_name: 'opening-hours-service'
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: [ '192.168.0.73:8081' ] # use your IP -> TODO use container
+
   - job_name: 'location-service'
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: [ '192.168.0.73:8082' ] # use your IP -> TODO use container
+
   - job_name: 'car-service'
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: [ '192.168.0.73:8083' ] # use your IP -> TODO use container
+
   - job_name: 'order-service'
     metrics_path: '/actuator/prometheus'
     static_configs:
