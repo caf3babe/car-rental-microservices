@@ -24,7 +24,6 @@ public class Car {
     @JsonProperty("car_id")
     private Integer carId;
 
-    //@Enumerated(EnumType.STRING)
     @Schema(name = "car_status", required = true, example = "AVAILABLE")
     @JsonProperty("car_status")
     private CarStatus carStatus;
@@ -111,7 +110,6 @@ public class Car {
     @JsonProperty("price")
     private Double price;
 
-    //@Enumerated(EnumType.STRING)
     @Valid
     @Schema(name = "currency_symbol", required = true, example = "USD")
     @JsonProperty("currency_symbol")
