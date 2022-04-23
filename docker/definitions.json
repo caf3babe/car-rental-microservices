@@ -1,0 +1,77 @@
+{
+  "rabbit_version": "3.8.3",
+  "users": [
+    {
+      "name": "guest",
+      "password": "guest",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "guest",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "topic_permissions": [],
+  "parameters": [],
+  "global_parameters": [
+    {
+      "name": "cluster_name",
+      "value": "rabbit@microservices-car-rental"
+    }
+  ],
+  "policies": [],
+  "queues": [
+    {
+      "name": "LOCATION_CREATED_EVENT",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "LOCATION_REJECTED_EVENT",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "LOCATION_FINISHED_EVENT",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "LOCATION_REJECTED_TOPIC",
+      "vhost": "/",
+      "type": "fanout",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "LOCATION_REJECTED_TOPIC",
+      "vhost": "/",
+      "destination": "LOCATION_REJECTED_EVENT",
+      "destination_type": "queue",
+      "routing_key": "",
+      "arguments": {}
+    }
+  ]
+}

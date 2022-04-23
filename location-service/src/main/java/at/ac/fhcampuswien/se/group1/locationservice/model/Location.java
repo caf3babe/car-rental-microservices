@@ -72,5 +72,9 @@ public class Location {
     @JsonProperty("longitude")
     private String longitude;
 
+    @Schema(name = "saga_status")
+    @JsonProperty("saga_status")
+    private SagaStatus status;
+
 }
 

@@ -2,6 +2,7 @@ package at.ac.fhcampuswien.se.group1.locationservice.utility;
 
 import at.ac.fhcampuswien.se.group1.locationservice.model.Location;
 import at.ac.fhcampuswien.se.group1.locationservice.model.OpeningHours;
+import at.ac.fhcampuswien.se.group1.locationservice.model.SagaStatus;
 import at.ac.fhcampuswien.se.group1.locationservice.repository.LocationRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -36,9 +37,9 @@ public class SeedDatabase implements CommandLineRunner {
                 "08.00 Uhr - 23.00 Uhr");
 
 
-        Location locationDatasetOne = new Location(1,openingHoursDatasetOne,"Airport Vienna","Parkstrasse","16","Schwechat",1300,"airport-vienna@carrentalvienna.com","06602526284","48.12037524536211","16.563466629953894");
+        Location locationDatasetOne = new Location(1,openingHoursDatasetOne,"Airport Vienna","Parkstrasse","16","Schwechat",1300,"airport-vienna@carrentalvienna.com","06602526284","48.12037524536211","16.563466629953894", SagaStatus.FINISHED);
 
-        Location locationDatasetTwo = new Location(2,openingHoursDatasetTwo,"Vienna Centre","Stephansplatz","1","Vienna",1010,"stephansplatz@carrentalvienna.com","06602526284","44.12037524536211","18.563466629953894");
+        Location locationDatasetTwo = new Location(2,openingHoursDatasetTwo,"Vienna Centre","Stephansplatz","1","Vienna",1010,"stephansplatz@carrentalvienna.com","06602526284","44.12037524536211","18.563466629953894", SagaStatus.FINISHED);
 
         this.locationRepository.deleteAll();
 
