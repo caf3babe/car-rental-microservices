@@ -8,18 +8,18 @@ services:
       - "8071:8071"
     container_name: configuration-service
 
-#  discoveryservice:
-#    build: ../discovery-service/.
-#    ports:
-#      - "8070:8070"
-#    depends_on:
-#      - configurationservice
-#    environment:
-#      PROFILE: "dev"
-#      SERVER_PORT: "8070"
-#      CONFIGSERVER_URI: "http://configurationservice:8071"
-#      CONFIGSERVER_PORT: "8071"
-#    container_name: discovery-service
+  discoveryservice:
+    build: ../discovery-service/.
+    ports:
+      - "8070:8070"
+    depends_on:
+      - configurationservice
+    environment:
+      PROFILE: "dev"
+      SERVER_PORT: "8070"
+      CONFIGSERVER_URI: "http://configurationservice:8071"
+      CONFIGSERVER_PORT: "8071"
+    container_name: discovery-service
 
   prometheus:
     image: prom/prometheus:latest
