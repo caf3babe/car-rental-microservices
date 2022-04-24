@@ -35,7 +35,7 @@ public class OpenAPIConfig {
                                                 ".net/wiki/)")
                                 .version("1.0.0")
                                 .license(new License().name("MIT")
-                                        .url("https://github.com/davidschedler/car-rental-app/blob/main/LICENSE"))
+                                        .url("https://github.com/caf3babe/car-rental-microservices/blob/main/LICENSE"))
                 );
     }
 }

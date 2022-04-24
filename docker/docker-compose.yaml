@@ -26,11 +26,11 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     container_name: prometheus
 
   grafana:
-    image: "grafana/grafana:latest"
+    image: grafana/grafana:latest
     ports:
       - "3000:3000"
     environment:
@@ -39,7 +39,7 @@ services:
     container_name: grafana
 
   currencydatabase:
-    image: mongo
+    image: mongo:5.0
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -49,7 +49,7 @@ services:
     container_name: currency-database
 
   openinghoursdatabase:
-    image: mongo
+    image: mongo:5.0
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -59,7 +59,7 @@ services:
     container_name: opening-hours-database
 
   locationdatabase:
-    image: mongo
+    image: mongo:5.0
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -69,7 +69,7 @@ services:
     container_name: location-database
 
   cardatabase:
-    image: mongo
+    image: mongo:5.0
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -79,7 +79,7 @@ services:
     container_name: car-database
 
   orderdatabase:
-    image: mongo
+    image: mongo:5.0
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -91,7 +91,12 @@ services:
   rabbitmq:
     image: rabbitmq:3-management
     ports:
+      # AMQP protocol port
       - "5672:5672"
+      # HTTP management UI
       - "15672:15672"
+    volumes:
+      - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
     container_name: rabbitmq
 

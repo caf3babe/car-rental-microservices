@@ -27,6 +27,7 @@
         <module>car-service</module>
         <module>currency-service</module>
         <module>opening-hours-service</module>
+        <module>location-service</module>
         <!-- here go other modules -->
         <!-- just add an entry for that and let intellij automagically create it for you with option + enter -->
     </modules>

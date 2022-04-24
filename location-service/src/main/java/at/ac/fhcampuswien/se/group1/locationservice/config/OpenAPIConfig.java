@@ -1,4 +1,4 @@
-package at.ac.fhcampuswien.se.group1.openinghoursservice.config;
+package at.ac.fhcampuswien.se.group1.locationservice.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -15,7 +15,7 @@ public class OpenAPIConfig {
     public OpenAPI apiInfo() {
 
         final Server server = new Server();
-        server.setUrl("http://localhost:8081/");
+        server.setUrl("http://localhost:8082/");
 
         final List<Server> servers = new ArrayList<>();
         servers.add(server);
@@ -28,9 +28,9 @@ public class OpenAPIConfig {
                 )
                 .info(
                         new Info()
-                                .title("Currency Service")
+                                .title("Location Service")
                                 .description(
-                                        "This is the opening hours service for the Car Rental microservice architecture. For further " +
+                                        "This is the location service for the Car Rental microservice architecture. For further " +
                                                 "information, please visit our [Wiki](https://se-2022.atlassian" +
                                                 ".net/wiki/)")
                                 .version("1.0.0")
