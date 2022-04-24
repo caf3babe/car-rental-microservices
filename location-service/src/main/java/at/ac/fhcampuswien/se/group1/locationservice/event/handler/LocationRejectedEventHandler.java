@@ -22,10 +22,10 @@ public class LocationRejectedEventHandler {
     @RabbitListener(queues = {"${queue.location-rejected}"})
     public void onOrderCanceled(@Payload String payload) throws JsonProcessingException {
 
-        log.debug("Handling a reject location event {}", payload);
+        log.info("Handling a reject location event {}", payload);
 
         LocationRejectedEvent event = mapper.readValue(payload, LocationRejectedEvent.class);
 
-        locationService.rejectOrder(event.getLocation().getLocationId());
+        locationService.rejectLocation(event.getLocation());
     }
 }

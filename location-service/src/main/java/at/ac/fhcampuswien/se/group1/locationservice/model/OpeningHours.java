@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,6 +13,7 @@ import javax.validation.Valid;
 @AllArgsConstructor
 @Data
 @Document
+@NoArgsConstructor
 public class OpeningHours {
     
     @Id
@@ -55,4 +57,7 @@ public class OpeningHours {
     @JsonProperty("sunday")
     private String sunday;
 
+    public OpeningHours(Integer openingHoursId) {
+        this.openingHoursId = openingHoursId;
+    }
 }

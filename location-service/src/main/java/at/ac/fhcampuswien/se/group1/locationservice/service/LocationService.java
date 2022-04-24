@@ -6,6 +6,7 @@ import at.ac.fhcampuswien.se.group1.locationservice.domain.exception.LocationNot
 import at.ac.fhcampuswien.se.group1.locationservice.domain.mapper.LocationMapper;
 import at.ac.fhcampuswien.se.group1.locationservice.event.LocationCreatedEvent;
 import at.ac.fhcampuswien.se.group1.locationservice.model.Location;
+import at.ac.fhcampuswien.se.group1.locationservice.model.OpeningHours;
 import at.ac.fhcampuswien.se.group1.locationservice.model.SagaStatus;
 import at.ac.fhcampuswien.se.group1.locationservice.repository.LocationRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,13 +31,17 @@ public class LocationService {
 
     private final ApplicationEventPublisher publisher;
 
+    private final SequenceGeneratorService sequenceGeneratorService;
+
     @Transactional
     public Location createLocation(CreateLocationRequest locationRequest) {
         Location location = locationMapper.create(locationRequest);
-
+        location.setLocationId(sequenceGeneratorService.generateSequence(Location.SEQUENCE_NAME));
         location.setStatus(SagaStatus.CREATED);
+        OpeningHours openingHours = new OpeningHours(locationRequest.getOpeningHoursId());
+        location.setOpeningHours(openingHours);
 
-        log.debug("Saving an location {}", location);
+        log.info("Saving an location {}", location);
 
         Location returnLocation = locationRepository.save(location);
 
@@ -69,52 +74,53 @@ public class LocationService {
 
         LocationCreatedEvent event = new LocationCreatedEvent(UUID.randomUUID().toString(), location);
 
-        log.debug("Publishing an location created event {}", event);
+        log.info("Publishing an location created event {}", event);
 
         publisher.publishEvent(event);
 
     }
 
     @Transactional
-    public void updateLocationAsFinished(Integer locationId) {
+    public void updateLocationAsFinished(Location location) {
 
-        log.debug("Updating Location {} to {}", locationId, SagaStatus.FINISHED);
+        log.info("Updating Location {} to {}", location, SagaStatus.FINISHED);
 
-        Optional<Location> locationOptional = locationRepository.findById(locationId);
+        Optional<Location> locationOptional = locationRepository.findById(location.getLocationId());
 
         if (locationOptional.isPresent()) {
 
-            Location order = locationOptional.get();
-            order.setStatus(SagaStatus.FINISHED);
-            locationRepository.save(order);
+            Location updateLocation = locationOptional.get();
+            updateLocation.setStatus(SagaStatus.FINISHED);
+            updateLocation.setOpeningHours(location.getOpeningHours());
+            locationRepository.save(updateLocation);
 
-            log.debug("Location {} done", order.getLocationId());
+            log.info("Location {} done", updateLocation.getLocationId());
 
         } else {
 
-            log.error("Cannot update Location to status {}, Location {} not found", SagaStatus.FINISHED, locationId);
+            log.error("Cannot update Location to status {}, Location {} not found", SagaStatus.FINISHED, location);
 
         }
     }
 
     @Transactional
-    public void rejectOrder(Integer locationId) {
+    public void rejectLocation(Location location) {
 
-        log.debug("Canceling Location {}", locationId);
+        log.info("Canceling Location {}", location);
 
-        Optional<Location> optionalLocation = locationRepository.findById(locationId);
+        Optional<Location> optionalLocation = locationRepository.findById(location.getLocationId());
 
         if (optionalLocation.isPresent()) {
 
-            Location location = optionalLocation.get();
-            location.setStatus(SagaStatus.REJECTED);
-            locationRepository.save(location);
+            Location updateLocation = optionalLocation.get();
+            updateLocation.setStatus(SagaStatus.REJECTED);
+            locationRepository.save(updateLocation);
 
-            log.debug("Location {} was canceled", location.getLocationId());
+            log.info("Location {} was canceled", updateLocation.getLocationId());
 
         } else {
 
-            log.error("Cannot find an Order {}", locationId);
+            log.info("Cannot find an Location {}", location.getLocationId());
 
         }
     }

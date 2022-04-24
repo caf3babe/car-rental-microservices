@@ -19,15 +19,14 @@ public class LocationFinishedEventHandler {
 
     private ObjectMapper mapper;
 
-
     @RabbitListener(queues = {"${queue.location-finished}"})
-    public void handleOrderDoneEvent(@Payload String payload) throws JsonProcessingException {
+    public void handleLocationDoneEvent(@Payload String payload) throws JsonProcessingException {
 
-        log.debug("Handling a location finished event {}", payload);
+        log.info("Handling a location finished event {}", payload);
 
         LocationFinishedEvent event = mapper.readValue(payload, LocationFinishedEvent.class);
 
-        locationService.updateLocationAsFinished(event.getLocation().getLocationId());
+        locationService.updateLocationAsFinished(event.getLocation());
 
     }
 }

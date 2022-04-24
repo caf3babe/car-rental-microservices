@@ -1,6 +1,6 @@
-package at.ac.fhcampuswien.se.group1.locationservice.event.listener;
+package at.ac.fhcampuswien.se.group1.openinghoursservice.event.listener;
 
-import at.ac.fhcampuswien.se.group1.locationservice.event.LocationCreatedEvent;
+import at.ac.fhcampuswien.se.group1.openinghoursservice.event.LocationFinishedEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
@@ -13,28 +13,28 @@ import org.springframework.transaction.event.TransactionalEventListener;
 
 @Log4j2
 @Component
-public class LocationEventListener {
+public class FinishedEventListener {
 
     private final RabbitTemplate rabbitTemplate;
-    private final String queueLocationCreated;
+    private final String queueLocationFinished;
     private final ObjectMapper mapper;
 
-    public LocationEventListener(RabbitTemplate rabbitTemplate,
-                              @Value("${queue.location-created}") String queueLocationCreated,ObjectMapper mapper) {
+    public FinishedEventListener(RabbitTemplate rabbitTemplate,
+                                 @Value("${queue.location-finished}") String queueLocationFinished, ObjectMapper mapper) {
 
         this.rabbitTemplate = rabbitTemplate;
-        this.queueLocationCreated = queueLocationCreated;
+        this.queueLocationFinished = queueLocationFinished;
         this.mapper = mapper;
 
     }
 
     @Async
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
-    public void onCreateEvent(LocationCreatedEvent event) throws JsonProcessingException {
+    public void onCreateEvent(LocationFinishedEvent event) throws JsonProcessingException {
 
-        log.debug("Sending location created event to {}, event: {}", queueLocationCreated, event);
+        log.debug("Sending location finished event to {}, event: {}", queueLocationFinished, event);
 
-        rabbitTemplate.convertAndSend(queueLocationCreated, mapper.writeValueAsString(event));
+        rabbitTemplate.convertAndSend(queueLocationFinished, mapper.writeValueAsString(event));
 
     }
 }

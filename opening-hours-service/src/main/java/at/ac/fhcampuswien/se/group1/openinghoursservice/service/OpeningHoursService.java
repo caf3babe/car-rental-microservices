@@ -40,11 +40,30 @@ public class OpeningHoursService {
         return openingHoursRepository.findById(id).orElseThrow(() -> new OpeningHoursNotFoundException("Opening Hours was not found for " + id));
     }
 
+    public void checkLocation(Location location) {
+
+        log.info("Check for location id {}", location.getLocationId());
+
+        if (
+                openingHoursRepository.findAll()
+                        .stream()
+                        .anyMatch(openingHours -> openingHours.getOpeningHoursId().equals(location.getOpeningHours().getOpeningHoursId()))
+        ) {
+
+            location.setOpeningHours(openingHoursRepository.findById(location.getOpeningHours().getOpeningHoursId()).get());
+
+            publishLocationFinished(location);
+
+        } else {
+            publishRejectedLocation(location);
+        }
+    }
+
     private void publishLocationFinished(Location location) {
 
         LocationFinishedEvent event = new LocationFinishedEvent(transactionId.getTransactionId(), location);
 
-        log.debug("Publishing location finished event {}", event);
+        log.info("Publishing location finished event {}", event);
 
         publisher.publishEvent(event);
 
@@ -54,33 +73,10 @@ public class OpeningHoursService {
 
         LocationRejectedEvent event = new LocationRejectedEvent(transactionId.getTransactionId(), location);
 
-        log.debug("Publishing rejected location event {}", event);
+        log.info("Publishing location rejected event {}", event);
 
         publisher.publishEvent(event);
 
     }
-
-    public void checkLocation(Location location) {
-
-        log.debug("Confirm for location id {}", location.getLocationId());
-
-
-        if (
-                openingHoursRepository.findAll()
-                        .stream()
-                        .anyMatch(openingHours -> openingHours.getOpeningHoursId().equals(location.getOpeningHours().getOpeningHoursId()))
-        ) {
-
-            log.debug("Location confirmed for location id {}", location.getLocationId());
-
-            publishLocationFinished(location);
-
-            return;
-
-        } else {
-            publishRejectedLocation(location);
-        }
-    }
-
 
 }

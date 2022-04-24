@@ -55,7 +55,7 @@
   ],
   "exchanges": [
     {
-      "name": "LOCATION_REJECTED_TOPIC",
+      "name": "LOCATION_REJECTED_TOPIC_NOT_USED",
       "vhost": "/",
       "type": "fanout",
       "durable": true,
@@ -66,7 +66,7 @@
   ],
   "bindings": [
     {
-      "source": "LOCATION_REJECTED_TOPIC",
+      "source": "LOCATION_REJECTED_TOPIC_NOT_USED",
       "vhost": "/",
       "destination": "LOCATION_REJECTED_EVENT",
       "destination_type": "queue",

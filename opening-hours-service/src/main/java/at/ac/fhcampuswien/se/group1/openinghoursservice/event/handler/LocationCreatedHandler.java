@@ -23,7 +23,7 @@ public class LocationCreatedHandler {
     @RabbitListener(queues = {"${queue.location-created}"})
     public void handle(@Payload String payload) throws JsonProcessingException {
 
-        log.debug("Handling a created location event {}", payload);
+        log.info("Handling a created location event {}", payload);
 
         LocationCreatedEvent event = mapper.readValue(payload, LocationCreatedEvent.class);
 

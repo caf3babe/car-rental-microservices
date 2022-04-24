@@ -26,7 +26,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     container_name: prometheus
 
   grafana:
@@ -96,6 +96,7 @@ services:
       # HTTP management UI
       - "15672:15672"
     volumes:
-      - ./definitions.json:/etc/rabbitmq/definitions.json:ro
+      - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
     container_name: rabbitmq
 
