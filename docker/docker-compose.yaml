@@ -30,7 +30,7 @@ services:
     container_name: prometheus
 
   grafana:
-    image: "grafana/grafana:latest"
+    image: grafana/grafana:latest
     ports:
       - "3000:3000"
     environment:
@@ -39,7 +39,7 @@ services:
     container_name: grafana
 
   currencydatabase:
-    image: mongo
+    image: mongo:5.0
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -49,7 +49,7 @@ services:
     container_name: currency-database
 
   openinghoursdatabase:
-    image: mongo
+    image: mongo:5.0
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -59,7 +59,7 @@ services:
     container_name: opening-hours-database
 
   locationdatabase:
-    image: mongo
+    image: mongo:5.0
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -69,7 +69,7 @@ services:
     container_name: location-database
 
   cardatabase:
-    image: mongo
+    image: mongo:5.0
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -79,7 +79,7 @@ services:
     container_name: car-database
 
   orderdatabase:
-    image: mongo
+    image: mongo:5.0
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
