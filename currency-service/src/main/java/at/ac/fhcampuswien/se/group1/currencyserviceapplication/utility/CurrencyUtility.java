@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.se.group1.currencyserviceapplication.utility;
 
+import lombok.extern.log4j.Log4j2;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -8,6 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.net.URL;
 
+@Log4j2
 public class CurrencyUtility {
 
     private static final String URL = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";

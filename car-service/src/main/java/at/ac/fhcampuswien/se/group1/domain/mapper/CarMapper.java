@@ -1,7 +1,7 @@
-package at.ac.fhcampuswien.se.group1.core.domain.mapper;
+package at.ac.fhcampuswien.se.group1.domain.mapper;
 
-import at.ac.fhcampuswien.se.group1.core.domain.dto.CarRequest;
-import at.ac.fhcampuswien.se.group1.core.models.Car;
+import at.ac.fhcampuswien.se.group1.domain.dto.CarRequest;
+import at.ac.fhcampuswien.se.group1.models.Car;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
@@ -9,12 +9,11 @@ import org.mapstruct.MappingTarget;
 import static org.mapstruct.NullValueCheckStrategy.ALWAYS;
 import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 @Mapper(componentModel = "spring")
-public abstract class CarMapper {
-
-    //CHECK_DAVID  
+public interface CarMapper {
+    
     @BeanMapping(nullValueCheckStrategy = ALWAYS, nullValuePropertyMappingStrategy = IGNORE)
-    abstract Car create(CarRequest request);
-
+    Car create(CarRequest request);
+    
     @BeanMapping(nullValueCheckStrategy = ALWAYS, nullValuePropertyMappingStrategy = IGNORE)
-    abstract Car update(CarRequest request, @MappingTarget Car car);
+    Car update(CarRequest request, @MappingTarget Car car);
 }

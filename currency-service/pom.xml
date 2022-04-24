@@ -88,6 +88,10 @@
             <classifier>test-binder</classifier>
             <type>test-jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit</artifactId>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>

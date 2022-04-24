@@ -1,11 +1,11 @@
-package at.ac.fhcampuswien.se.group1.core.controller;
+package at.ac.fhcampuswien.se.group1.controller;
 
-import at.ac.fhcampuswien.se.group1.core.domain.dto.CarRequest;
-import at.ac.fhcampuswien.se.group1.core.models.ApiError;
-import at.ac.fhcampuswien.se.group1.core.models.Car;
-import at.ac.fhcampuswien.se.group1.core.models.CarStatus;
-import at.ac.fhcampuswien.se.group1.core.models.CurrencySymbol;
-import at.ac.fhcampuswien.se.group1.core.service.CarService;
+import at.ac.fhcampuswien.se.group1.domain.dto.CarRequest;
+import at.ac.fhcampuswien.se.group1.models.ApiError;
+import at.ac.fhcampuswien.se.group1.models.Car;
+import at.ac.fhcampuswien.se.group1.models.CarStatus;
+import at.ac.fhcampuswien.se.group1.models.CurrencySymbol;
+import at.ac.fhcampuswien.se.group1.service.CarService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -14,22 +14,27 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.apache.coyote.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigInteger;
 import java.util.List;
 
+@Log4j2
 @Validated
 @Tag(name = "car", description = "the car API")
 @RestController
 @RequestMapping("/api/v1")
 public class CarController {
-
-
+    
     private final CarService carService;
 
     public CarController(CarService carService) {
@@ -53,6 +58,7 @@ public class CarController {
     public ResponseEntity<Car> createCar(
             @Parameter(name = "Car", description = "New car data", required = true) @Valid @RequestBody
             CarRequest carRequest) {
+        log.debug("Create Car Controller: [{}]", carRequest);
         return new ResponseEntity<>(carService.createCar(carRequest), HttpStatus.CREATED);
     }
 
@@ -75,7 +81,7 @@ public class CarController {
     @DeleteMapping(value = "/car/{id}", produces = {"application/json"})
     public ResponseEntity<Response> deleteCarById(
             @Parameter(name = "id", description = "The id of the user to update", required = true) @PathVariable("id")
-            Integer id) {
+                    BigInteger id) {
         carService.deleteCarById(id);
         Response response = new Response();
 
@@ -102,7 +108,7 @@ public class CarController {
     @GetMapping(value = "/car/{id}", produces = {"application/json"})
     public ResponseEntity<Car> getCarById(
             @Parameter(name = "id", description = "The id of the car to retrieve", required = true) @PathVariable("id")
-            Integer id) {
+                    BigInteger id) {
         return ResponseEntity.ok(carService.getCarById(id));
 
     }
@@ -169,7 +175,7 @@ public class CarController {
     @PutMapping(value = "/car/{id}", produces = {"application/json"}, consumes = {"application/json"})
     public ResponseEntity<Car> updateCarById(
             @Parameter(name = "id", description = "The id of the car to update", required = true) @PathVariable("id")
-            Integer id,
+                    BigInteger id,
             @Parameter(name = "carRequest", description = "Updated car object", required = true) @Valid @RequestBody
             CarRequest carRequest) {
         return ResponseEntity.ok(carService.updateCarById(id, carRequest));

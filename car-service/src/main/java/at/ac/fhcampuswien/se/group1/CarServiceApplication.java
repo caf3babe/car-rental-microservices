@@ -1,4 +1,4 @@
-package at.ac.fhcampuswien.se.group1.core;
+package at.ac.fhcampuswien.se.group1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

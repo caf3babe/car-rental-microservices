@@ -1,4 +1,4 @@
-package at.ac.fhcampuswien.se.group1.core.models;
+package at.ac.fhcampuswien.se.group1.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -22,7 +23,7 @@ public class Car {
     @Valid
     @Schema(name = "car_id", required = true, example = "1")
     @JsonProperty("car_id")
-    private Integer carId;
+    private BigInteger carId;
 
     @Schema(name = "car_status", required = true, example = "AVAILABLE")
     @JsonProperty("car_status")
