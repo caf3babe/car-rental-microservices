@@ -23,7 +23,6 @@
     </properties>
 
     <modules>
-        <module>spring-gateway</module>
         <module>car-service</module>
         <module>currency-service</module>
         <module>opening-hours-service</module>
