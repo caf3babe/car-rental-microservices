@@ -1,9 +1,12 @@
-package at.ac.fhcampuswien.se.group1.core.domain.dto;
+package at.ac.fhcampuswien.se.group1.domain.dto;
 
-import at.ac.fhcampuswien.se.group1.core.models.CarStatus;
-import at.ac.fhcampuswien.se.group1.core.models.CurrencySymbol;
+import at.ac.fhcampuswien.se.group1.models.CarStatus;
+import at.ac.fhcampuswien.se.group1.models.CurrencySymbol;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.Valid;
@@ -11,8 +14,9 @@ import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@AllArgsConstructor
+@Data
 public class CarRequest {
-
 
     //@Enumerated(EnumType.STRING)
     @Schema(name = "car_status", required = true, example = "AVAILABLE")

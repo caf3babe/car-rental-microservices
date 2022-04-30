@@ -1,4 +1,4 @@
-package at.ac.fhcampuswien.se.group1.core.models;
+package at.ac.fhcampuswien.se.group1.models;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
