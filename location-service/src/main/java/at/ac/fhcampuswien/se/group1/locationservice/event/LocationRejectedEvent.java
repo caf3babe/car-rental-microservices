@@ -7,8 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 public class LocationRejectedEvent {
-
+    
     private String transactionId;
-
+    
     private Location location;
 }

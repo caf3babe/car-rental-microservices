@@ -77,7 +77,7 @@ public class LocationController {
                     CreateLocationRequest locationRequest) {
         return new ResponseEntity<>(locationService.createLocation(locationRequest), HttpStatus.CREATED);
     }
-
+    
     /**
      * DELETE /location/{id} : Delete a location by id
      *
@@ -105,7 +105,7 @@ public class LocationController {
         response.setMessage(String.format("Successfully deleted location with id %s", id));
         return ResponseEntity.ok(response);
     }
-
+    
     /**
      * GET /location/{id} : Get a location by id
      *
@@ -139,7 +139,7 @@ public class LocationController {
                                         "latitude": "48.12037524536211",
                                         "longitude": "16.563466629953894"
                                       }
-                            """)},schema = @Schema(implementation = Location.class))}),
+                            """)}, schema = @Schema(implementation = Location.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid Location Id", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))}),
             @ApiResponse(responseCode = "404", description = "Location not found", content = {
@@ -210,7 +210,7 @@ public class LocationController {
                                     ]
                                     """)},
                             array = @ArraySchema(schema = @Schema(implementation = Location.class)))}),
-                    @ApiResponse(responseCode = "204", description = "Successful Operation but no content found")},
+            @ApiResponse(responseCode = "204", description = "Successful Operation but no content found")},
             security = {@SecurityRequirement(name = "bearerAuth")})
     @GetMapping(value = "/location", produces = {"application/json"})
     public ResponseEntity<?> getLocations() {
@@ -221,7 +221,7 @@ public class LocationController {
     /**
      * PUT /location/{id} : Update location by id
      *
-     * @param id   The id of the location to update (required)
+     * @param id              The id of the location to update (required)
      * @param locationRequest Updated location object (required)
      * @return Successful operation (status code 200)
      * or Invalid ID supplied (status code 400)
@@ -253,7 +253,7 @@ public class LocationController {
                                         "latitude": "48.20852573292344",
                                         "longitude": "16.374050059536025"
                                       }
-                            """)},schema = @Schema(implementation = UpdateLocationRequest.class))}),
+                            """)}, schema = @Schema(implementation = UpdateLocationRequest.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid Location Id", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))}),
             @ApiResponse(responseCode = "404", description = "Location not found", content = {

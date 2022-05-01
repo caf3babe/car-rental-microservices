@@ -12,10 +12,10 @@ import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 
 @Mapper(componentModel = "spring")
 public interface LocationMapper {
-
+    
     @BeanMapping(nullValueCheckStrategy = ALWAYS, nullValuePropertyMappingStrategy = IGNORE)
     Location create(CreateLocationRequest request);
-
+    
     @BeanMapping(nullValueCheckStrategy = ALWAYS, nullValuePropertyMappingStrategy = IGNORE)
     Location update(UpdateLocationRequest request, @MappingTarget Location location);
 }

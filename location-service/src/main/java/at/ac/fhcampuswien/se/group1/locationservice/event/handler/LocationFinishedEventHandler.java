@@ -14,19 +14,19 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class LocationFinishedEventHandler {
-
+    
     private final LocationService locationService;
-
+    
     private ObjectMapper mapper;
-
+    
     @RabbitListener(queues = {"${queue.location-finished}"})
     public void handleLocationDoneEvent(@Payload String payload) throws JsonProcessingException {
-
+        
         log.info("Handling a location finished event {}", payload);
-
+        
         LocationFinishedEvent event = mapper.readValue(payload, LocationFinishedEvent.class);
-
+        
         locationService.updateLocationAsFinished(event.getLocation());
-
+        
     }
 }

@@ -17,66 +17,70 @@ import java.util.List;
 @Log4j2
 @Service
 public class OpeningHoursService {
-
+    
     private final OpeningHoursRepository openingHoursRepository;
-
+    
     private final ApplicationEventPublisher publisher;
-
+    
     private final TransactionId transactionId;
-
-    public OpeningHoursService(OpeningHoursRepository openingHoursRepository, ApplicationEventPublisher publisher, TransactionId transactionId) {
+    
+    public OpeningHoursService(OpeningHoursRepository openingHoursRepository, ApplicationEventPublisher publisher,
+                               TransactionId transactionId) {
         this.openingHoursRepository = openingHoursRepository;
         this.publisher = publisher;
         this.transactionId = transactionId;
     }
-
+    
     public List<OpeningHours> getAllOpeningHours() {
         List<OpeningHours> openingHours = new ArrayList<>();
         openingHoursRepository.findAll().iterator().forEachRemaining(openingHours::add);
         return openingHours;
     }
-
+    
     public OpeningHours getOpeningHoursById(Integer id) {
-        return openingHoursRepository.findById(id).orElseThrow(() -> new OpeningHoursNotFoundException("Opening Hours was not found for " + id));
+        return openingHoursRepository.findById(id)
+                .orElseThrow(() -> new OpeningHoursNotFoundException("Opening Hours was not found for " + id));
     }
-
+    
     public void checkLocation(Location location) {
-
+        
         log.info("Check for location id {}", location.getLocationId());
-
+        
         if (
                 openingHoursRepository.findAll()
                         .stream()
-                        .anyMatch(openingHours -> openingHours.getOpeningHoursId().equals(location.getOpeningHours().getOpeningHoursId()))
+                        .anyMatch(openingHours -> openingHours.getOpeningHoursId()
+                                .equals(location.getOpeningHours().getOpeningHoursId()))
         ) {
-
-            location.setOpeningHours(openingHoursRepository.findById(location.getOpeningHours().getOpeningHoursId()).get());
-
+            
+            location.setOpeningHours(
+                    openingHoursRepository.findById(location.getOpeningHours().getOpeningHoursId()).get());
+            
             publishLocationFinished(location);
-
+            
         } else {
             publishRejectedLocation(location);
         }
     }
-
+    
     private void publishLocationFinished(Location location) {
-
+        
         LocationFinishedEvent event = new LocationFinishedEvent(transactionId.getTransactionId(), location);
-
+        
         log.info("Publishing location finished event {}", event);
-
+        
         publisher.publishEvent(event);
-
+        
     }
-
+    
     private void publishRejectedLocation(Location location) {
-
+        
         LocationRejectedEvent event = new LocationRejectedEvent(transactionId.getTransactionId(), location);
-
+        
         log.info("Publishing location rejected event {}", event);
-
+        
         publisher.publishEvent(event);
-
+        
     }
-
+    
 }

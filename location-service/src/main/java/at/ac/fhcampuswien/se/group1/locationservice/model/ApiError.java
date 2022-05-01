@@ -19,33 +19,30 @@ public class ApiError {
     @Schema(name = "status", required = true)
     @JsonProperty("status")
     private final HttpStatus status;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss", locale = "de_AT")
-    private LocalDateTime timestamp;
-
     @NotNull
     @Schema(name = "message")
     @JsonProperty("message")
     private final String message;
-    
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss", locale = "de_AT")
+    private LocalDateTime timestamp;
     @NotNull
     @Schema(name = "errors")
     @JsonProperty("errors")
     private List<String> errors = new ArrayList<>();
-
-
+    
+    
     public ApiError(HttpStatus status, String message, String error) {
         timestamp = LocalDateTime.now();
         this.status = status;
         this.message = message;
         errors = Arrays.asList(error);
     }
-
+    
     public ApiError(HttpStatus status, String message) {
         timestamp = LocalDateTime.now();
         this.status = status;
         this.message = message;
     }
-
+    
 }
 

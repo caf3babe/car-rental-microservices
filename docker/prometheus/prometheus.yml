@@ -1,11 +1,11 @@
 global:
-  scrape_interval:     5s # Set the scrape interval to every 5 seconds.
+  scrape_interval: 5s # Set the scrape interval to every 5 seconds.
   evaluation_interval: 5s # Evaluate rules every 5 seconds.
 scrape_configs:
   - job_name: 'currency-service'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['192.168.0.73:8080'] # use your IP -> TODO use container
+      - targets: [ '192.168.0.73:8080' ] # use your IP -> TODO use container
 
   - job_name: 'opening-hours-service'
     metrics_path: '/actuator/prometheus'

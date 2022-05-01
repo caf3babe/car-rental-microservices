@@ -17,10 +17,10 @@ import javax.validation.constraints.Size;
 @Data
 @Document
 public class Location {
-
+    
     @Transient
     public static final String SEQUENCE_NAME = "locations_sequence";
-
+    
     @Id
     @Valid
     @Schema(name = "location_id")
@@ -75,10 +75,10 @@ public class Location {
     @Schema(name = "longitude")
     @JsonProperty("longitude")
     private String longitude;
-
+    
     @Schema(name = "saga_status")
     @JsonProperty("saga_status")
     private SagaStatus status;
-
+    
 }
 

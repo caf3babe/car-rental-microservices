@@ -15,21 +15,21 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class LocationCreatedHandler {
-
+    
     private final ObjectMapper mapper;
     private final OpeningHoursService openingHoursService;
     private final TransactionId transactionId;
-
+    
     @RabbitListener(queues = {"${queue.location-created}"})
     public void handle(@Payload String payload) throws JsonProcessingException {
-
+        
         log.info("Handling a created location event {}", payload);
-
+        
         LocationCreatedEvent event = mapper.readValue(payload, LocationCreatedEvent.class);
-
+        
         transactionId.setTransactionId(event.getTransactionId());
-
+        
         openingHoursService.checkLocation(event.getLocation());
-
+        
     }
 }

@@ -1,4 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>at.ac.fhcampuswien.se.group1</groupId>
@@ -27,6 +27,7 @@
         <module>currency-service</module>
         <module>opening-hours-service</module>
         <module>location-service</module>
+        <module>order-service</module>
         <!-- here go other modules -->
         <!-- just add an entry for that and let intellij automagically create it for you with option + enter -->
     </modules>

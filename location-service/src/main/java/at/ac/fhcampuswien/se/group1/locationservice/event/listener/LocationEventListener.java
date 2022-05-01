@@ -14,27 +14,27 @@ import org.springframework.transaction.event.TransactionalEventListener;
 @Log4j2
 @Component
 public class LocationEventListener {
-
+    
     private final RabbitTemplate rabbitTemplate;
     private final String queueLocationCreated;
     private final ObjectMapper mapper;
-
+    
     public LocationEventListener(RabbitTemplate rabbitTemplate,
-                              @Value("${queue.location-created}") String queueLocationCreated,ObjectMapper mapper) {
-
+                                 @Value("${queue.location-created}") String queueLocationCreated, ObjectMapper mapper) {
+        
         this.rabbitTemplate = rabbitTemplate;
         this.queueLocationCreated = queueLocationCreated;
         this.mapper = mapper;
-
+        
     }
-
+    
     @Async
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void onCreateEvent(LocationCreatedEvent event) throws JsonProcessingException {
-
+        
         log.debug("Sending location created event to {}, event: {}", queueLocationCreated, event);
-
+        
         rabbitTemplate.convertAndSend(queueLocationCreated, mapper.writeValueAsString(event));
-
+        
     }
 }

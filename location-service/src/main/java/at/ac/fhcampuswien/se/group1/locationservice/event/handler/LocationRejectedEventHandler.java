@@ -14,18 +14,18 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class LocationRejectedEventHandler {
-
+    
     private final LocationService locationService;
-
+    
     private ObjectMapper mapper;
-
+    
     @RabbitListener(queues = {"${queue.location-rejected}"})
     public void onOrderCanceled(@Payload String payload) throws JsonProcessingException {
-
+        
         log.info("Handling a reject location event {}", payload);
-
+        
         LocationRejectedEvent event = mapper.readValue(payload, LocationRejectedEvent.class);
-
+        
         locationService.rejectLocation(event.getLocation());
     }
 }

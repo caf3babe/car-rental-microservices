@@ -12,11 +12,11 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @NoArgsConstructor
 @Document
 public class Currency {
-
+    
     @JsonProperty("symbol")
     @Field("symbol")
     private String currencySymbol;
     @JsonProperty("rate")
     private double rate;
-
+    
 }

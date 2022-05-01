@@ -21,18 +21,19 @@ public class CurrencyConvertRequestEventHandler {
     private final RabbitTemplate rabbitTemplate;
     private final ObjectMapper mapper;
     
-    @RabbitListener(queues = { "${queue.currency-convert-request}" })
+    @RabbitListener(queues = {"${queue.currency-convert-request}"})
     public Double handleCurrencyConvertRequest(@Payload String payload) {
         log.info("Handling a Currency Convert Request {}", payload);
-
+        
         try {
             CurrencyConvertRequestEvent event = mapper.readValue(payload, CurrencyConvertRequestEvent.class);
             
             log.info("Parsed event CurrencyConvertRequestEvent: {}", event);
-    
-            Currency currency = currencyService.calculatingCrossCurrency(event.getSourceSymbol(), event.getDestinationSymbol(),
-                    event.getSourceValue());
-    
+            
+            Currency currency =
+                    currencyService.calculatingCrossCurrency(event.getSourceSymbol(), event.getDestinationSymbol(),
+                            event.getSourceValue());
+            
             return currency.getRate();
             
         } catch (JsonProcessingException e) {

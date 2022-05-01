@@ -26,13 +26,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 public class OpeningHoursController {
-
+    
     private final OpeningHoursService openingHoursService;
-
+    
     public OpeningHoursController(OpeningHoursService openingHoursService) {
         this.openingHoursService = openingHoursService;
     }
-
+    
     /**
      * GET /location/{id} : Get a opening hour by id
      *
@@ -75,10 +75,10 @@ public class OpeningHoursController {
             @PathVariable("id") Integer id) {
         return ResponseEntity.ok(openingHoursService.getOpeningHoursById(id));
     }
-
-
+    
+    
     // TODO does this endpoint even makes sense?
-
+    
     /**
      * GET /location : Get a list of opening hours
      *

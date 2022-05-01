@@ -22,13 +22,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 public class CurrencyController {
-
+    
     private final CurrencyService currencyService;
-
+    
     public CurrencyController(CurrencyService currencyService) {
         this.currencyService = currencyService;
     }
-
+    
     /**
      * GET /currency : Get a list of supported currencies
      *
@@ -174,16 +174,17 @@ public class CurrencyController {
     public ResponseEntity<List<Currency>> getCurrencies() {
         return ResponseEntity.ok(currencyService.getCurrencies());
     }
-
+    
     //TODO only for Tests, must be replaced with messaging and removed from here
     @GetMapping(value = "/currency/{symbol}", produces = {"application/json"})
     public ResponseEntity<Currency> getCurrencyBySymbol(
-            @Parameter(name = "symbol", description = "The symbol of the currency to retrieve", required = true) @PathVariable("symbol")
+            @Parameter(name = "symbol", description = "The symbol of the currency to retrieve", required = true)
+            @PathVariable("symbol")
                     String symbol) {
         return ResponseEntity.ok(currencyService.currencyPerCode(symbol));
-
+        
     }
-
+    
     //TODO only for Tests, must be replaced with messaging and removed from here
     @GetMapping(value = "/currency/calculate", produces = {"application/json"})
     public ResponseEntity<Currency> calculatingCrossCurrency(

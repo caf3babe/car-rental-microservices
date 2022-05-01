@@ -71,6 +71,6 @@ public class Location {
     @Schema(name = "longitude")
     @JsonProperty("longitude")
     private String longitude;
-
+    
 }
 
