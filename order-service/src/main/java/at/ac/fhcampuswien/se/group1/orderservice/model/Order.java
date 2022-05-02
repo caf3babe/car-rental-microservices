@@ -2,6 +2,7 @@ package at.ac.fhcampuswien.se.group1.orderservice.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,6 +16,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.Date;
 
+@AllArgsConstructor
 @Data
 public class Order {
     
@@ -99,6 +101,10 @@ public class Order {
     @Schema(name = "order_status", required = true)
     @JsonProperty("order_status")
     private OrderStatus orderStatus;
+
+    @Schema(name = "saga_status")
+    @JsonProperty("saga_status")
+    private SagaStatus status;
     
 }
 

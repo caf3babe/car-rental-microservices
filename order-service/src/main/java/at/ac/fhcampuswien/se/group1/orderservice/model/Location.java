@@ -2,6 +2,7 @@ package at.ac.fhcampuswien.se.group1.orderservice.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.Valid;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+@AllArgsConstructor
 @Data
 public class Location {
     
@@ -65,10 +67,9 @@ public class Location {
     @Schema(name = "longitude")
     @JsonProperty("longitude")
     private String longitude;
-    
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
+
+    @Schema(name = "saga_status")
+    @JsonProperty("saga_status")
+    private SagaStatus status;
 }
 

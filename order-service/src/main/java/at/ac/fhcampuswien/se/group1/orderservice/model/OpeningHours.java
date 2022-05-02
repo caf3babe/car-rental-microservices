@@ -2,10 +2,12 @@ package at.ac.fhcampuswien.se.group1.orderservice.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.Valid;
 
+@AllArgsConstructor
 @Data
 public class OpeningHours {
     
