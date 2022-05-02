@@ -1,12 +1,10 @@
 package at.ac.fhcampuswien.se.group1.orderservice.service;
 
-
 import at.ac.fhcampuswien.se.group1.orderservice.domain.dto.OrderRequest;
 import at.ac.fhcampuswien.se.group1.orderservice.domain.exception.OrderNotFoundException;
 import at.ac.fhcampuswien.se.group1.orderservice.domain.mapper.OrderMapper;
 import at.ac.fhcampuswien.se.group1.orderservice.event.*;
-import at.ac.fhcampuswien.se.group1.orderservice.model.Order;
-import at.ac.fhcampuswien.se.group1.orderservice.model.OrderStatus;
+import at.ac.fhcampuswien.se.group1.orderservice.model.*;
 import at.ac.fhcampuswien.se.group1.orderservice.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -17,24 +15,20 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Log4j2 @RequiredArgsConstructor @Service public class OrderService {
     
     private final OrderRepository orderRepository;
-    
-    // TODO replace with messaging
-    // private final CarRepository carRepository;
-    
-    // TODO replace with messaging
-    // private final LocationRepository locationRepository;
-    
+
     private final ApplicationEventPublisher publisher;
     
     private final OrderMapper orderMapper;
-    
+
     public Order createOrder(OrderRequest orderRequest) {
-        Order order = orderMapper.create(orderRequest);
-        return createOrUpdateOrder(orderRequest, order);
+
+        return createOrUpdateOrder(orderRequest);
     }
     
     public void deleteOrderById(BigInteger id) {
@@ -52,12 +46,12 @@ import java.util.List;
                 .orElseThrow(() -> new OrderNotFoundException("Order with id" + id + " could not be found, ok bye."));
     }
     
-    public Order updateOrderById(BigInteger id, OrderRequest orderRequest) {
-        Order oldOrder = orderRepository.findById(id)
-                .orElseThrow(() -> new OrderNotFoundException("Order was not found for " + id));
-        Order newOrder = orderMapper.update(orderRequest, oldOrder);
-        return createOrUpdateOrder(orderRequest, newOrder);
-    }
+//    public Order updateOrderById(BigInteger id, OrderRequest orderRequest) {
+//        Order oldOrder = orderRepository.findById(id)
+//                .orElseThrow(() -> new OrderNotFoundException("Order was not found for " + id));
+//        Order newOrder = orderMapper.update(orderRequest, oldOrder);
+//        return createOrUpdateOrder(orderRequest, newOrder);
+//    }
     
     public Order updateStatusById(BigInteger id, OrderStatus orderStatus) {
         Order order = orderRepository.findById(id)
@@ -76,82 +70,112 @@ import java.util.List;
     }
     
     @Transactional
-    public Order createOrUpdateOrder(OrderRequest orderRequest, Order newOrder) {
-        // TODO replace with messaging
-        /*
-        Car car = carRepository.findById(orderRequest.getCarId())
-                .orElseThrow(() -> new CarNotFoundException("Car was not found for " + orderRequest.getCarId()));
-        Location locationRental = locationRepository.findById(orderRequest.getLocationOfRentalId()).orElseThrow(
-                () -> new LocationNotFoundException(
-                        "Location of rental was not found for " + orderRequest.getLocationOfRentalId()));
-        Location locationReturn = locationRepository.findById(orderRequest.getLocationOfReturnId()).orElseThrow(
-                () -> new LocationNotFoundException(
-                        "Location of return was not found for " + orderRequest.getLocationOfReturnId()));
-        newOrder.setCar(car);
-        newOrder.setLocationOfRental(locationRental);
-        newOrder.setLocationOfReturn(locationReturn);
-        */
+    public Order createOrUpdateOrder(OrderRequest orderRequest) {
+
+        Order order = orderMapper.create(orderRequest);
+
+        order.setStatus(SagaStatus.CREATED);
+
+        Car car = new Car();
+        car.setCarId(BigInteger.valueOf(orderRequest.getCarId()));
+        order.setCar(car);
+
+        Location locationRental = new Location();
+        locationRental.setLocationId(orderRequest.getLocationOfRentalId());
+        order.setLocationOfRental(locationRental);
+
+        Location locationReturn = new Location();
+        locationReturn.setLocationId(orderRequest.getLocationOfReturnId());
+        order.setLocationOfReturn(locationReturn);
+
+        log.info("Saving an order {}", order);
+
+        Order returnOrder = orderRepository.save(order);
+
+        publish(returnOrder);
         
-        log.info("Got request to create order: {}", orderRequest);
-        log.info("with mapped order object: {}", newOrder);
-        
-        
-        Order order = orderRepository.save(newOrder);
-        
-        OrderInitEvent event = new OrderInitEvent(order.getOrderId(), BigInteger.valueOf(orderRequest.getCarId()),
-                orderRequest.getLocationOfRentalId(), orderRequest.getLocationOfReturnId());
-        log.info("Sending order init event {}", event);
-        
+        return returnOrder;
+    }
+
+    private void publish(Order order) {
+
+        OrderCreateEvent event = new OrderCreateEvent(UUID.randomUUID().toString(), order);
+
+        log.info("Publishing an Order created event {}", event);
+
         publisher.publishEvent(event);
-        
-        
-        // remove values, so we can check it when corresponding events are received
-        newOrder.setCar(null);
-        newOrder.setLocationOfReturn(null);
-        // TODO: create dedicated event for RentalLocation
-        // newOrder.setLocationOfRental(null);
-        
-        return order;
+
     }
     
     @Transactional
-    public void updateOrderCarUnavailable(CarUnavailableEvent event) {
-        orderRepository.findById(event.getOrderId()).ifPresent(order -> order.setOrderStatus(OrderStatus.CANCELED));
+    public void updateOrderCarUnavailable(Order order) {
+
+        log.info("Canceling Order because Car isn't available {}", order);
+
+        Optional<Order> optionalOrder = orderRepository.findById(order.getOrderId());
+
+        if (optionalOrder.isPresent()) {
+
+            Order updateOrder = optionalOrder.get();
+            updateOrder.setStatus(SagaStatus.CAR_REJECTED);
+            orderRepository.save(updateOrder);
+
+            log.info("Order {} was canceled - CAR_REJECTED", updateOrder.getOrderId());
+
+        } else {
+
+            log.info("Cannot find an order {}", order.getOrderId());
+
+        }
+
     }
+
     
     @Transactional
-    public void updateOrderCarAvailable(CarAvailableEvent event) {
-        orderRepository.findById(event.getOrderId()).ifPresentOrElse(order -> {
-            order.setCar(event.getCar());
-            if (order.getLocationOfRental() != null && order.getLocationOfReturn() != null) {
-                // TODO do something do indicate order is confirmed, another OrderStatus: CONFIRMED?
-                log.info("Confirming order {}", order.getOrderId());
-            }
-            
-            orderRepository.save(order);
-            
-        }, () -> {
-            log.error("Order with id {} was not found", event.getOrderId());
-        });
+    public void updateOrderLocationExistent(Order order) {
+        log.info("Updating Order {} to {}", order, SagaStatus.FINISHED);
+
+        Optional<Order> optionalOrder = orderRepository.findById(order.getOrderId());
+
+        if (optionalOrder.isPresent()) {
+
+            Order updateOrder = optionalOrder.get();
+            updateOrder.setStatus(SagaStatus.FINISHED);
+            updateOrder.setCar(order.getCar());
+            updateOrder.setLocationOfRental(order.getLocationOfRental());
+            updateOrder.setLocationOfReturn(order.getLocationOfReturn());
+            orderRepository.save(updateOrder);
+
+            log.info("Order {} done", updateOrder.getOrderId());
+
+        } else {
+
+            log.error("Cannot update Order to status {}, Order {} not found", SagaStatus.FINISHED, order);
+
+        }
+
     }
-    
+
     @Transactional
-    public void updateOrderLocationNonexistent(LocationNonexistentEvent event) {
-        orderRepository.findById(event.getOrderId()).ifPresent(order -> order.setOrderStatus(OrderStatus.CANCELED));
-    }
-    
-    @Transactional
-    public void updateOrderLocationExistent(LocationExistentEvent event) {
-        orderRepository.findById(event.getOrderId()).ifPresentOrElse(order -> {
-            
-            order.setLocationOfRental(event.getLocation());
-            if (order.getCar() != null && order.getLocationOfReturn() != null) {
-                // TODO do something do indicate order is confirmed, another OrderStatus: CONFIRMED?
-                log.info("Confirming order {}", order.getOrderId());
-            }
-        }, () -> {
-            log.error("Order with id {} was not found", event.getOrderId());
-        });
+    public void updateOrderLocationNonexistent(Order order) {
+
+        log.info("Canceling Order because Location isn't existent {}", order);
+
+        Optional<Order> optionalOrder = orderRepository.findById(order.getOrderId());
+
+        if (optionalOrder.isPresent()) {
+
+            Order UpdateOrder = optionalOrder.get();
+            UpdateOrder.setStatus(SagaStatus.LOCATION_REJECTED);
+            orderRepository.save(UpdateOrder);
+
+            log.info("Order {} was canceled - LOCATION_REJECTED", UpdateOrder.getOrderId());
+
+        } else {
+
+            log.info("Cannot find an order {}", order.getOrderId());
+
+        }
     }
     
 }

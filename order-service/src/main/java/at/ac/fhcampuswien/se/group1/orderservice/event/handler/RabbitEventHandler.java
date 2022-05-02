@@ -30,21 +30,10 @@ public class RabbitEventHandler {
         CarUnavailableEvent event = mapper.readValue(payload, CarUnavailableEvent.class);
         
         
-        orderService.updateOrderCarUnavailable(event);
+        orderService.updateOrderCarUnavailable(event.getOrder());
         
     }
-    
-    @RabbitListener(queues = {"${queue.car-available}"})
-    public void handleCarAvailableEvent(@Payload String payload) throws JsonProcessingException {
-        
-        log.info("Handling a car available event {}", payload);
-        
-        CarAvailableEvent event = mapper.readValue(payload, CarAvailableEvent.class);
-        
-        orderService.updateOrderCarAvailable(event);
-        
-    }
-    
+
     @RabbitListener(queues = {"${queue.location-nonexistent}"})
     public void handleLocationNonexistentEvent(@Payload String payload) throws JsonProcessingException {
         
@@ -52,7 +41,7 @@ public class RabbitEventHandler {
         
         LocationNonexistentEvent event = mapper.readValue(payload, LocationNonexistentEvent.class);
         
-        orderService.updateOrderLocationNonexistent(event);
+        orderService.updateOrderLocationNonexistent(event.getOrder());
         
     }
     
@@ -63,7 +52,7 @@ public class RabbitEventHandler {
         
         LocationExistentEvent event = mapper.readValue(payload, LocationExistentEvent.class);
         
-        orderService.updateOrderLocationExistent(event);
+        orderService.updateOrderLocationExistent(event.getOrder());
         
     }
 }

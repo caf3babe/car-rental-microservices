@@ -175,7 +175,6 @@ public class CurrencyController {
         return ResponseEntity.ok(currencyService.getCurrencies());
     }
     
-    //TODO only for Tests, must be replaced with messaging and removed from here
     @GetMapping(value = "/currency/{symbol}", produces = {"application/json"})
     public ResponseEntity<Currency> getCurrencyBySymbol(
             @Parameter(name = "symbol", description = "The symbol of the currency to retrieve", required = true)
@@ -185,7 +184,6 @@ public class CurrencyController {
         
     }
     
-    //TODO only for Tests, must be replaced with messaging and removed from here
     @GetMapping(value = "/currency/calculate", produces = {"application/json"})
     public ResponseEntity<Currency> calculatingCrossCurrency(
             @RequestParam String symbolInput, @RequestParam String symbolOutput, @RequestParam double amount) {

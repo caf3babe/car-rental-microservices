@@ -75,10 +75,7 @@ public class OpeningHoursController {
             @PathVariable("id") Integer id) {
         return ResponseEntity.ok(openingHoursService.getOpeningHoursById(id));
     }
-    
-    
-    // TODO does this endpoint even makes sense?
-    
+
     /**
      * GET /location : Get a list of opening hours
      *
@@ -127,7 +124,7 @@ public class OpeningHoursController {
                     @ApiResponse(responseCode = "204", description = "Successful Operation but no content found")},
             security = {@SecurityRequirement(name = "bearerAuth")})
     @GetMapping(value = "/opening-hours", produces = {"application/json"})
-    public ResponseEntity<?> getAllOpeningHours() {
+    public ResponseEntity<List<OpeningHours>> getAllOpeningHours() {
         List<OpeningHours> openingHours = openingHoursService.getAllOpeningHours();
         return openingHours.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(openingHours);
     }

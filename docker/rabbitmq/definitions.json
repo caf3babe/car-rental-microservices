@@ -60,7 +60,7 @@
       "arguments": {}
     },
     {
-      "name": "ORDER_INIT",
+      "name": "ORDER_CREATE",
       "vhost": "/",
       "durable": true,
       "auto_delete": false,

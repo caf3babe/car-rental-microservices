@@ -10,7 +10,6 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.Date;
 
-//TODO Replace with insert in Docker Enviornment later
 @Component
 public class SeedDatabase implements CommandLineRunner {
 
@@ -23,14 +22,13 @@ public class SeedDatabase implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        OpeningHours openingHoursDatasetOne = new OpeningHours(1, "07.00 Uhr - 23.30 Uhr",
-                "07.00 Uhr - 23.30 Uhr",
-                "07.00 Uhr - 23.30 Uhr",
-                "07.00 Uhr - 23.30 Uhr",
-                "07.00 Uhr - 23.30 Uhr",
-                "08.00 Uhr - 20.00 Uhr",
-                "08.00 Uhr - 23.00 Uhr");
-
+        OpeningHours openingHoursDatasetOne = new OpeningHours(1, "06.00 Uhr - 23.30 Uhr",
+                "08.00 Uhr - 23.30 Uhr",
+                "10.00 Uhr - 23.30 Uhr",
+                "11.00 Uhr - 23.30 Uhr",
+                "07.30 Uhr - 23.30 Uhr",
+                "06.00 Uhr - 20.00 Uhr",
+                "05.00 Uhr - 23.00 Uhr");
 
         Location locationDatasetOne =
                 new Location(1, openingHoursDatasetOne, "Airport Vienna", "Parkstrasse", "16", "Schwechat", 1300,

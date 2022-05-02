@@ -1,13 +1,14 @@
 package at.ac.fhcampuswien.se.group1.carservice.event;
 
+import at.ac.fhcampuswien.se.group1.carservice.model.Order;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.math.BigInteger;
 
 @AllArgsConstructor
 @Data
 public class CarUnavailableEvent {
-    BigInteger orderId;
-    BigInteger carId;
+
+    private String transactionId;
+
+    private Order order;
 }

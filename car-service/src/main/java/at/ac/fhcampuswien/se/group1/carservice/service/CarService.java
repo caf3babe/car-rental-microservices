@@ -3,14 +3,19 @@ package at.ac.fhcampuswien.se.group1.carservice.service;
 import at.ac.fhcampuswien.se.group1.carservice.domain.dto.CarRequest;
 import at.ac.fhcampuswien.se.group1.carservice.domain.exception.CarNotFoundException;
 import at.ac.fhcampuswien.se.group1.carservice.domain.mapper.CarMapper;
+import at.ac.fhcampuswien.se.group1.carservice.event.CarAvailableEvent;
+import at.ac.fhcampuswien.se.group1.carservice.event.CarUnavailableEvent;
 import at.ac.fhcampuswien.se.group1.carservice.event.handler.CurrencyConvertHandler;
 import at.ac.fhcampuswien.se.group1.carservice.model.Car;
 import at.ac.fhcampuswien.se.group1.carservice.model.CarStatus;
 import at.ac.fhcampuswien.se.group1.carservice.model.CurrencySymbol;
+import at.ac.fhcampuswien.se.group1.carservice.model.Order;
 import at.ac.fhcampuswien.se.group1.carservice.repository.CarRepository;
+import at.ac.fhcampuswien.se.group1.carservice.utility.TransactionIdentifier;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -22,6 +27,8 @@ import java.util.List;
     private final CarRepository carRepository;
     private final CarMapper carMapper;
     private final CurrencyConvertHandler currencyConvertHandler;
+    private final ApplicationEventPublisher publisher;
+    private final TransactionIdentifier transactionId;
     
     public Car createCar(CarRequest carRequest) {
         Car car = carMapper.create(carRequest);
@@ -79,6 +86,46 @@ import java.util.List;
     public Car updateCarById(BigInteger id, CarRequest carRequest) {
         return carRepository.save(carMapper.update(carRequest,
                 carRepository.findById(id).orElseThrow(() -> new CarNotFoundException("Car was not found for " + id))));
+    }
+
+    public void checkCar(Order order) {
+
+        log.info("Check for car id {}", order.getCar().getCarId());
+
+        if (
+                carRepository.findAll()
+                        .stream()
+                        .anyMatch(car -> car.getCarId()
+                                .equals(order.getCar().getCarId()))
+        ) {
+
+            order.setCar(carRepository.findById(order.getCar().getCarId()).get());
+
+            publishCarAvailable(order);
+
+        } else {
+            publishCarUnavailable(order);
+        }
+    }
+
+    private void publishCarAvailable(Order order) {
+
+        CarAvailableEvent event = new CarAvailableEvent(transactionId.getTransactionId(), order);
+
+        log.info("Publishing car available event {}", event);
+
+        publisher.publishEvent(event);
+
+    }
+
+    private void publishCarUnavailable(Order order) {
+
+        CarUnavailableEvent event = new CarUnavailableEvent(transactionId.getTransactionId(), order);
+
+        log.info("Publishing car unavailable event {}", event);
+
+        publisher.publishEvent(event);
+
     }
 }
 

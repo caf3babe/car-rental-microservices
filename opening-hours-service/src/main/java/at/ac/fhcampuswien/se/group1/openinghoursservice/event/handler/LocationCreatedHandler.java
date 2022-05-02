@@ -2,7 +2,7 @@ package at.ac.fhcampuswien.se.group1.openinghoursservice.event.handler;
 
 import at.ac.fhcampuswien.se.group1.openinghoursservice.event.LocationCreatedEvent;
 import at.ac.fhcampuswien.se.group1.openinghoursservice.service.OpeningHoursService;
-import at.ac.fhcampuswien.se.group1.openinghoursservice.utility.TransactionId;
+import at.ac.fhcampuswien.se.group1.openinghoursservice.utility.TransactionIdentifier;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ public class LocationCreatedHandler {
     
     private final ObjectMapper mapper;
     private final OpeningHoursService openingHoursService;
-    private final TransactionId transactionId;
+    private final TransactionIdentifier transactionIdentifier;
     
     @RabbitListener(queues = {"${queue.location-created}"})
     public void handle(@Payload String payload) throws JsonProcessingException {
@@ -27,7 +27,7 @@ public class LocationCreatedHandler {
         
         LocationCreatedEvent event = mapper.readValue(payload, LocationCreatedEvent.class);
         
-        transactionId.setTransactionId(event.getTransactionId());
+        transactionIdentifier.setId(event.getTransactionId());
         
         openingHoursService.checkLocation(event.getLocation());
         

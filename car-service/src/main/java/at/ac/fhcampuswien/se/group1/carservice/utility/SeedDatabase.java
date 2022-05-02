@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 
-// TODO: Replace with insert in Docker Enviornment later
 @Component
 public class SeedDatabase implements CommandLineRunner {
     

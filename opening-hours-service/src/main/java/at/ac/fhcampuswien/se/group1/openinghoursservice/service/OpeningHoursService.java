@@ -6,7 +6,7 @@ import at.ac.fhcampuswien.se.group1.openinghoursservice.model.Location;
 import at.ac.fhcampuswien.se.group1.openinghoursservice.model.OpeningHours;
 import at.ac.fhcampuswien.se.group1.openinghoursservice.model.OpeningHoursNotFoundException;
 import at.ac.fhcampuswien.se.group1.openinghoursservice.repository.OpeningHoursRepository;
-import at.ac.fhcampuswien.se.group1.openinghoursservice.utility.TransactionId;
+import at.ac.fhcampuswien.se.group1.openinghoursservice.utility.TransactionIdentifier;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -22,13 +22,13 @@ public class OpeningHoursService {
     
     private final ApplicationEventPublisher publisher;
     
-    private final TransactionId transactionId;
+    private final TransactionIdentifier transactionIdentifier;
     
     public OpeningHoursService(OpeningHoursRepository openingHoursRepository, ApplicationEventPublisher publisher,
-                               TransactionId transactionId) {
+                               TransactionIdentifier transactionIdentifier) {
         this.openingHoursRepository = openingHoursRepository;
         this.publisher = publisher;
-        this.transactionId = transactionId;
+        this.transactionIdentifier = transactionIdentifier;
     }
     
     public List<OpeningHours> getAllOpeningHours() {
@@ -65,7 +65,7 @@ public class OpeningHoursService {
     
     private void publishLocationFinished(Location location) {
         
-        LocationFinishedEvent event = new LocationFinishedEvent(transactionId.getTransactionId(), location);
+        LocationFinishedEvent event = new LocationFinishedEvent(transactionIdentifier.getId(), location);
         
         log.info("Publishing location finished event {}", event);
         
@@ -75,7 +75,7 @@ public class OpeningHoursService {
     
     private void publishRejectedLocation(Location location) {
         
-        LocationRejectedEvent event = new LocationRejectedEvent(transactionId.getTransactionId(), location);
+        LocationRejectedEvent event = new LocationRejectedEvent(transactionIdentifier.getId(), location);
         
         log.info("Publishing location rejected event {}", event);
         

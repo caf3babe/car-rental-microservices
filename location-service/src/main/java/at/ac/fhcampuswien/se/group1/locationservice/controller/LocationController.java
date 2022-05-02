@@ -21,6 +21,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigInteger;
 import java.util.List;
 
 @Validated
@@ -99,7 +100,7 @@ public class LocationController {
     @DeleteMapping(value = "/location/{id}", produces = {"application/json"})
     public ResponseEntity<Response> deleteLocationById(
             @Parameter(name = "id", description = "The id of the location to update", required = true)
-            @PathVariable("id") Integer id) {
+            @PathVariable("id") BigInteger id) {
         locationService.deleteLocationById(id);
         Response response = new Response();
         response.setMessage(String.format("Successfully deleted location with id %s", id));
@@ -148,7 +149,7 @@ public class LocationController {
     @GetMapping(value = "/location/{id}", produces = {"application/json"})
     public ResponseEntity<Location> getLocationById(
             @Parameter(name = "id", description = "The id of the location to retrieve", required = true)
-            @PathVariable("id") Integer id) {
+            @PathVariable("id") BigInteger id) {
         return ResponseEntity.ok(locationService.getLocationById(id));
     }
     
@@ -213,7 +214,7 @@ public class LocationController {
             @ApiResponse(responseCode = "204", description = "Successful Operation but no content found")},
             security = {@SecurityRequirement(name = "bearerAuth")})
     @GetMapping(value = "/location", produces = {"application/json"})
-    public ResponseEntity<?> getLocations() {
+    public ResponseEntity<List<Location>> getLocations() {
         List<Location> locations = locationService.getLocations();
         return locations.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(locations);
     }
@@ -264,7 +265,7 @@ public class LocationController {
     @PutMapping(value = "/location/{id}", produces = {"application/json"}, consumes = {"application/json"})
     public ResponseEntity<Location> updateLocationById(
             @Parameter(name = "id", description = "The id of the location to update", required = true)
-            @PathVariable("id") Integer id,
+            @PathVariable("id") BigInteger id,
             @Parameter(name = "body", description = "Updated location object", required = true) @Valid @RequestBody
                     UpdateLocationRequest locationRequest) {
         return ResponseEntity.ok(locationService.updateLocationById(id, locationRequest));

@@ -16,14 +16,14 @@ import org.springframework.transaction.event.TransactionalEventListener;
 public class CarAvailableEventListener {
     
     private final RabbitTemplate rabbitTemplate;
-    private final String queueOrderInit;
+    private final String queueCarAvailable;
     private final ObjectMapper mapper;
     
     public CarAvailableEventListener(RabbitTemplate rabbitTemplate,
                                      @Value("${queue.car-available}") String queueCarAvailable, ObjectMapper mapper) {
         
         this.rabbitTemplate = rabbitTemplate;
-        this.queueOrderInit = queueCarAvailable;
+        this.queueCarAvailable = queueCarAvailable;
         this.mapper = mapper;
         
     }
@@ -32,9 +32,9 @@ public class CarAvailableEventListener {
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void onCreateEvent(CarAvailableEvent event) throws JsonProcessingException {
         
-        log.info("Sending car available event to {}, event: {}", queueOrderInit, event);
+        log.info("Sending car available event to {}, event: {}", queueCarAvailable, event);
         
-        rabbitTemplate.convertAndSend(queueOrderInit, mapper.writeValueAsString(event));
+        rabbitTemplate.convertAndSend(queueCarAvailable, mapper.writeValueAsString(event));
         
     }
 }

@@ -50,9 +50,5 @@ public class OpeningHours {
     @Schema(name = "sunday", required = true)
     @JsonProperty("sunday")
     private String sunday;
-    
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
+
 }

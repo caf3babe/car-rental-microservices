@@ -7,7 +7,8 @@ import at.ac.fhcampuswien.se.group1.locationservice.repository.LocationRepositor
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-//TODO Replace with insert in Docker Enviornment later
+import java.math.BigInteger;
+
 @Component
 public class SeedDatabase implements CommandLineRunner {
     
@@ -20,30 +21,30 @@ public class SeedDatabase implements CommandLineRunner {
     @Override
     public void run(String... args) {
         
-        OpeningHours openingHoursDatasetOne = new OpeningHours(1, "07.00 Uhr - 23.30 Uhr",
-                "07.00 Uhr - 23.30 Uhr",
-                "07.00 Uhr - 23.30 Uhr",
-                "07.00 Uhr - 23.30 Uhr",
-                "07.00 Uhr - 23.30 Uhr",
-                "08.00 Uhr - 20.00 Uhr",
-                "08.00 Uhr - 23.00 Uhr");
+        OpeningHours openingHoursDatasetOne = new OpeningHours(1, "06.00 Uhr - 23.30 Uhr",
+                "08.00 Uhr - 23.30 Uhr",
+                "10.00 Uhr - 23.30 Uhr",
+                "11.00 Uhr - 23.30 Uhr",
+                "07.30 Uhr - 23.30 Uhr",
+                "06.00 Uhr - 20.00 Uhr",
+                "05.00 Uhr - 23.00 Uhr");
         
         OpeningHours openingHoursDatasetTwo = new OpeningHours(2, "08.00 Uhr - 23.30 Uhr",
+                "06.15 Uhr - 23.30 Uhr",
+                "07.10 Uhr - 23.30 Uhr",
                 "07.00 Uhr - 23.30 Uhr",
-                "09.00 Uhr - 23.30 Uhr",
-                "07.00 Uhr - 23.30 Uhr",
-                "07.00 Uhr - 23.30 Uhr",
-                "08.00 Uhr - 19.00 Uhr",
-                "08.00 Uhr - 23.00 Uhr");
+                "08.00 Uhr - 20.30 Uhr",
+                "10.10 Uhr - 19.00 Uhr",
+                "08.20 Uhr - 23.00 Uhr");
         
         
         Location locationDatasetOne =
-                new Location(1, openingHoursDatasetOne, "Airport Vienna", "Parkstrasse", "16", "Schwechat", 1300,
+                new Location(BigInteger.ONE, openingHoursDatasetOne, "Airport Vienna", "Parkstrasse", "16", "Schwechat", 1300,
                         "airport-vienna@carrentalvienna.com", "06602526284", "48.12037524536211", "16.563466629953894",
                         SagaStatus.FINISHED);
         
         Location locationDatasetTwo =
-                new Location(2, openingHoursDatasetTwo, "Vienna Centre", "Stephansplatz", "1", "Vienna", 1010,
+                new Location(BigInteger.TWO, openingHoursDatasetTwo, "Vienna Centre", "Stephansplatz", "1", "Vienna", 1010,
                         "stephansplatz@carrentalvienna.com", "06602526284", "44.12037524536211", "18.563466629953894",
                         SagaStatus.FINISHED);
         

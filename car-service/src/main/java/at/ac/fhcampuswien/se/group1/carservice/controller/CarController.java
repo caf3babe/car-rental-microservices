@@ -126,7 +126,7 @@ public class CarController {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))})},
             security = {@SecurityRequirement(name = "bearerAuth")})
     @GetMapping(value = "/car/findByStatus", produces = {"application/json"})
-    public ResponseEntity<?> getCarsByStatus(@RequestParam CarStatus carStatus) {
+    public ResponseEntity<List<Car>> getCarsByStatus(@RequestParam CarStatus carStatus) {
         List<Car> cars = carService.getCarsByStatus(carStatus);
         return cars.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(cars);
     }
@@ -144,7 +144,7 @@ public class CarController {
             @ApiResponse(responseCode = "204", description = "Successful Operation but no content found")},
             security = {@SecurityRequirement(name = "bearerAuth")})
     @GetMapping(value = "/car", produces = {"application/json"})
-    public ResponseEntity<?> getCars(@RequestParam CurrencySymbol currencySymbol) {
+    public ResponseEntity<List<Car>> getCars(@RequestParam CurrencySymbol currencySymbol) {
         List<Car> cars = carService.getCars(currencySymbol);
         return cars.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(cars);
     }
