@@ -7,7 +7,7 @@ import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class OrderUpdateStatusEvent {
+public class OrderStatusFailureEvent {
     private String transactionId;
     private Order order;
     private OrderStatus orderOldStatus;

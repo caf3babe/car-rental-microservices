@@ -32,7 +32,7 @@ public class OrderUpdateEventListener {
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void onCreateEvent(OrderUpdateEvent event) throws JsonProcessingException {
         
-        log.debug("Sending order update event to {}, event: {}", queueOrderUpdate, event);
+        log.info("Sending order update event to {}, event: {}", queueOrderUpdate, event);
         
         rabbitTemplate.convertAndSend(queueOrderUpdate, mapper.writeValueAsString(event));
         

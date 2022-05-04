@@ -3,6 +3,7 @@ package at.ac.fhcampuswien.se.group1.orderservice.event.handler;
 import at.ac.fhcampuswien.se.group1.orderservice.event.CarUnavailableEvent;
 import at.ac.fhcampuswien.se.group1.orderservice.event.LocationExistentEvent;
 import at.ac.fhcampuswien.se.group1.orderservice.event.LocationNonexistentEvent;
+import at.ac.fhcampuswien.se.group1.orderservice.event.OrderStatusFailureEvent;
 import at.ac.fhcampuswien.se.group1.orderservice.service.OrderService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -53,5 +54,27 @@ public class RabbitEventHandler {
         
         orderService.updateOrderLocationExistent(event.getOrder());
         
+    }
+
+    @RabbitListener(queues = {"${queue.order-status-failure}"})
+    public void handleOrderStatusFailureEvent(@Payload String payload) throws JsonProcessingException {
+
+        log.info("Handling a order status failure event {}", payload);
+
+        OrderStatusFailureEvent event = mapper.readValue(payload, OrderStatusFailureEvent.class);
+
+        orderService.updateOrderStatusFailure(event.getOrder(), event.getOrderOldStatus());
+
+    }
+
+    @RabbitListener(queues = {"${queue.order-status-success}"})
+    public void handleOrderStatusSuccessEvent(@Payload String payload) throws JsonProcessingException {
+
+        log.info("Handling a order status success event {}", payload);
+
+        LocationExistentEvent event = mapper.readValue(payload, LocationExistentEvent.class);
+
+        orderService.updateOrderStatusSuccess(event.getOrder());
+
     }
 }

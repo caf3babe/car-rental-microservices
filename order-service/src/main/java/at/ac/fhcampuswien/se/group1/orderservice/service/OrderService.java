@@ -89,17 +89,17 @@ import java.util.UUID;
     public Order updateStatusById(BigInteger id, OrderStatus orderStatus) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new OrderNotFoundException("Order was not found for " + id));
+        OrderStatus oldOrderStatus = order.getOrderStatus();
         order.setOrderStatus(orderStatus);
-        // TODO replace with messaging
-        /*
-        Car car = carRepository.findById(order.getCar().getCarId())
-                .orElseThrow(() -> new CarNotFoundException("Car was not found for " + order.getCar().getCarId()));
-        if (orderStatus == OrderStatus.ACTIVE) {
-            car.setCarStatus(CarStatus.RENTED);
-        } else {
-            car.setCarStatus(CarStatus.AVAILABLE);
-        }*/
-        return orderRepository.save(order);
+        order.setStatus(SagaStatus.CREATED);
+
+        log.info("Updating an order {}", order);
+
+        Order updateOrder = orderRepository.save(order);
+
+        publishUpdateStatus(updateOrder, oldOrderStatus);
+
+        return updateOrder;
     }
 
     private void publishCreate(Order order) {
@@ -117,6 +117,16 @@ import java.util.UUID;
         OrderUpdateEvent event = new OrderUpdateEvent(UUID.randomUUID().toString(), order);
 
         log.info("Publishing an Order updated event {}", event);
+
+        publisher.publishEvent(event);
+
+    }
+
+    private void publishUpdateStatus(Order order, OrderStatus orderStatus) {
+
+        OrderUpdateStatusEvent event = new OrderUpdateStatusEvent(UUID.randomUUID().toString(), order, orderStatus);
+
+        log.info("Publishing an Order updated status event {}", event);
 
         publisher.publishEvent(event);
 
@@ -192,5 +202,48 @@ import java.util.UUID;
 
         }
     }
-    
+
+    public void updateOrderStatusSuccess(Order order) {
+
+        log.info("Updating Order {} to {}", order, SagaStatus.FINISHED);
+
+        Optional<Order> optionalOrder = orderRepository.findById(order.getOrderId());
+
+        if (optionalOrder.isPresent()) {
+
+            Order updateOrder = optionalOrder.get();
+            updateOrder.setStatus(SagaStatus.FINISHED);
+            updateOrder.setCar(order.getCar());
+
+            orderRepository.save(updateOrder);
+
+            log.info("Order {} done", updateOrder.getOrderId());
+
+        } else {
+
+            log.error("Cannot update Order to status {}, Order {} not found", SagaStatus.FINISHED, order);
+
+        }
+    }
+
+    public void updateOrderStatusFailure(Order order, OrderStatus orderOldStatus) {
+        log.info("Revert Order status{} to {}", order, SagaStatus.FINISHED);
+
+        Optional<Order> optionalOrder = orderRepository.findById(order.getOrderId());
+
+        if (optionalOrder.isPresent()) {
+
+            Order updateOrder = optionalOrder.get();
+            updateOrder.setStatus(SagaStatus.FINISHED);
+            updateOrder.setOrderStatus(orderOldStatus);
+            orderRepository.save(updateOrder);
+
+            log.info("Order {} done", updateOrder.getOrderId());
+
+        } else {
+
+            log.error("Cannot update Order to status {}, Order {} not found", SagaStatus.FINISHED, order);
+
+        }
+    }
 }

@@ -1,6 +1,6 @@
 package at.ac.fhcampuswien.se.group1.orderservice.event.listener;
 
-import at.ac.fhcampuswien.se.group1.orderservice.event.OrderCreateEvent;
+import at.ac.fhcampuswien.se.group1.orderservice.event.OrderUpdateStatusEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
@@ -13,28 +13,28 @@ import org.springframework.transaction.event.TransactionalEventListener;
 
 @Log4j2
 @Component
-public class OrderCreateEventListener {
-    
+public class OrderUpdateStatusEventListener {
+
     private final RabbitTemplate rabbitTemplate;
-    private final String queueOrderCreate;
+    private final String queueOrderUpdateStatus;
     private final ObjectMapper mapper;
-    
-    public OrderCreateEventListener(RabbitTemplate rabbitTemplate,
-                                    @Value("${queue.order-create}") String queueOrderCreate, ObjectMapper mapper) {
-        
+
+    public OrderUpdateStatusEventListener(RabbitTemplate rabbitTemplate,
+                                    @Value("${queue.order-update-status}") String queueOrderUpdateStatus, ObjectMapper mapper) {
+
         this.rabbitTemplate = rabbitTemplate;
-        this.queueOrderCreate = queueOrderCreate;
+        this.queueOrderUpdateStatus = queueOrderUpdateStatus;
         this.mapper = mapper;
-        
+
     }
-    
+
     @Async
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
-    public void onCreateEvent(OrderCreateEvent event) throws JsonProcessingException {
-        
-        log.info("Sending order create event to {}, event: {}", queueOrderCreate, event);
-        
-        rabbitTemplate.convertAndSend(queueOrderCreate, mapper.writeValueAsString(event));
-        
+    public void onUpdateStatusEvent(OrderUpdateStatusEvent event) throws JsonProcessingException {
+
+        log.info("Sending order update status event to {}, event: {}", queueOrderUpdateStatus, event);
+
+        rabbitTemplate.convertAndSend(queueOrderUpdateStatus, mapper.writeValueAsString(event));
+
     }
 }
