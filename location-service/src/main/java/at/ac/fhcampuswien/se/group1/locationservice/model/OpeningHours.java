@@ -56,7 +56,7 @@ public class OpeningHours {
     @Schema(name = "sunday", required = true)
     @JsonProperty("sunday")
     private String sunday;
-
+    
     public OpeningHours(Integer openingHoursId) {
         this.openingHoursId = openingHoursId;
     }

@@ -10,16 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OpenAPIConfig {
-
+    
     @Bean
     public OpenAPI apiInfo() {
-
+        
         final Server server = new Server();
         server.setUrl("http://localhost:8080/");
-
+        
         final List<Server> servers = new ArrayList<>();
         servers.add(server);
-
+        
         return new OpenAPI()
                 .servers(
                         new ArrayList<>(
@@ -30,7 +30,8 @@ public class OpenAPIConfig {
                         new Info()
                                 .title("Currency Service")
                                 .description(
-                                        "This is the currency service for the Car Rental microservice architecture. For further " +
+                                        "This is the currency service for the Car Rental microservice architecture. " +
+                                                "For further " +
                                                 "information, please visit our [Wiki](https://se-2022.atlassian" +
                                                 ".net/wiki/)")
                                 .version("1.0.0")

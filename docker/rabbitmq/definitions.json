@@ -32,21 +32,21 @@
   "policies": [],
   "queues": [
     {
-      "name": "LOCATION_CREATED_EVENT",
+      "name": "LOCATION_CREATED_QUEUE",
       "vhost": "/",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
-      "name": "LOCATION_REJECTED_EVENT",
+      "name": "LOCATION_REJECTED_QUEUE",
       "vhost": "/",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
-      "name": "LOCATION_FINISHED_EVENT",
+      "name": "LOCATION_FINISHED_QUEUE",
       "vhost": "/",
       "durable": true,
       "auto_delete": false,
@@ -54,6 +54,69 @@
     },
     {
       "name": "CURRENCY_CONVERT_REQUEST_QUEUE",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "ORDER_CREATE_QUEUE",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "ORDER_UPDATE_QUEUE",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "ORDER_UPDATE_STATUS_QUEUE",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "ORDER_STATUS_FAILURE_QUEUE",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "ORDER_STATUS_SUCCESS_QUEUE",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "CAR_UNAVAILABLE_QUEUE",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "CAR_AVAILABLE_QUEUE",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "LOCATION_NONEXISTENT_QUEUE",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "LOCATION_EXISTENT_QUEUE",
       "vhost": "/",
       "durable": true,
       "auto_delete": false,
@@ -75,7 +138,7 @@
     {
       "source": "LOCATION_REJECTED_TOPIC_NOT_USED",
       "vhost": "/",
-      "destination": "LOCATION_REJECTED_EVENT",
+      "destination": "LOCATION_REJECTED_QUEUE",
       "destination_type": "queue",
       "routing_key": "",
       "arguments": {}

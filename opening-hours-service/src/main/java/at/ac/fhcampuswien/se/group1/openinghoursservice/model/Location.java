@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.math.BigInteger;
 
 @AllArgsConstructor
 @Data
@@ -21,7 +22,7 @@ public class Location {
     @Valid
     @Schema(name = "location_id")
     @JsonProperty("location_id")
-    private Integer locationId;
+    private BigInteger locationId;
     
     @JsonProperty("opening_hours")
     private OpeningHours openingHours;
@@ -71,6 +72,6 @@ public class Location {
     @Schema(name = "longitude")
     @JsonProperty("longitude")
     private String longitude;
-
+    
 }
 

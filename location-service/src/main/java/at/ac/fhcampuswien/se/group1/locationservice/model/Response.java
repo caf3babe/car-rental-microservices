@@ -17,7 +17,8 @@ public class Response {
     @NotNull
     @Pattern(regexp = "^([\\w. ]+)$")
     @Size(max = 250)
-    @Schema(name = "message", description = "The description message for this success code", required = true, example = "Successfully deleted object with id 3")
+    @Schema(name = "message", description = "The description message for this success code", required = true,
+            example = "Successfully deleted object with id 3")
     @JsonProperty("message")
     private String message;
 }

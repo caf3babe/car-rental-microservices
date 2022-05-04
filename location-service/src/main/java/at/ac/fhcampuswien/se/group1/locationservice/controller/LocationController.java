@@ -21,6 +21,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigInteger;
 import java.util.List;
 
 @Validated
@@ -77,7 +78,7 @@ public class LocationController {
                     CreateLocationRequest locationRequest) {
         return new ResponseEntity<>(locationService.createLocation(locationRequest), HttpStatus.CREATED);
     }
-
+    
     /**
      * DELETE /location/{id} : Delete a location by id
      *
@@ -99,13 +100,13 @@ public class LocationController {
     @DeleteMapping(value = "/location/{id}", produces = {"application/json"})
     public ResponseEntity<Response> deleteLocationById(
             @Parameter(name = "id", description = "The id of the location to update", required = true)
-            @PathVariable("id") Integer id) {
+            @PathVariable("id") BigInteger id) {
         locationService.deleteLocationById(id);
         Response response = new Response();
         response.setMessage(String.format("Successfully deleted location with id %s", id));
         return ResponseEntity.ok(response);
     }
-
+    
     /**
      * GET /location/{id} : Get a location by id
      *
@@ -139,7 +140,7 @@ public class LocationController {
                                         "latitude": "48.12037524536211",
                                         "longitude": "16.563466629953894"
                                       }
-                            """)},schema = @Schema(implementation = Location.class))}),
+                            """)}, schema = @Schema(implementation = Location.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid Location Id", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))}),
             @ApiResponse(responseCode = "404", description = "Location not found", content = {
@@ -148,7 +149,7 @@ public class LocationController {
     @GetMapping(value = "/location/{id}", produces = {"application/json"})
     public ResponseEntity<Location> getLocationById(
             @Parameter(name = "id", description = "The id of the location to retrieve", required = true)
-            @PathVariable("id") Integer id) {
+            @PathVariable("id") BigInteger id) {
         return ResponseEntity.ok(locationService.getLocationById(id));
     }
     
@@ -210,10 +211,10 @@ public class LocationController {
                                     ]
                                     """)},
                             array = @ArraySchema(schema = @Schema(implementation = Location.class)))}),
-                    @ApiResponse(responseCode = "204", description = "Successful Operation but no content found")},
+            @ApiResponse(responseCode = "204", description = "Successful Operation but no content found")},
             security = {@SecurityRequirement(name = "bearerAuth")})
     @GetMapping(value = "/location", produces = {"application/json"})
-    public ResponseEntity<?> getLocations() {
+    public ResponseEntity<List<Location>> getLocations() {
         List<Location> locations = locationService.getLocations();
         return locations.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(locations);
     }
@@ -221,7 +222,7 @@ public class LocationController {
     /**
      * PUT /location/{id} : Update location by id
      *
-     * @param id   The id of the location to update (required)
+     * @param id              The id of the location to update (required)
      * @param locationRequest Updated location object (required)
      * @return Successful operation (status code 200)
      * or Invalid ID supplied (status code 400)
@@ -253,7 +254,7 @@ public class LocationController {
                                         "latitude": "48.20852573292344",
                                         "longitude": "16.374050059536025"
                                       }
-                            """)},schema = @Schema(implementation = UpdateLocationRequest.class))}),
+                            """)}, schema = @Schema(implementation = UpdateLocationRequest.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid Location Id", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))}),
             @ApiResponse(responseCode = "404", description = "Location not found", content = {
@@ -264,7 +265,7 @@ public class LocationController {
     @PutMapping(value = "/location/{id}", produces = {"application/json"}, consumes = {"application/json"})
     public ResponseEntity<Location> updateLocationById(
             @Parameter(name = "id", description = "The id of the location to update", required = true)
-            @PathVariable("id") Integer id,
+            @PathVariable("id") BigInteger id,
             @Parameter(name = "body", description = "Updated location object", required = true) @Valid @RequestBody
                     UpdateLocationRequest locationRequest) {
         return ResponseEntity.ok(locationService.updateLocationById(id, locationRequest));

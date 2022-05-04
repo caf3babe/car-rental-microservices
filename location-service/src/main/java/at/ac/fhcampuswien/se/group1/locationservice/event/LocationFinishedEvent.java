@@ -7,9 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 public class LocationFinishedEvent {
-
     private String transactionId;
-
     private Location location;
 }
 

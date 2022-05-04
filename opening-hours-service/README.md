@@ -1,6 +1,6 @@
 # opening-hours-service
 
-##Swagger
+## Swagger
 
 * http://localhost:8081/swagger-ui/index.html
 

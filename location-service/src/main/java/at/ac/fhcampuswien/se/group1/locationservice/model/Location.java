@@ -5,27 +5,24 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.math.BigInteger;
 
 @AllArgsConstructor
 @Data
 @Document
 public class Location {
-
-    @Transient
-    public static final String SEQUENCE_NAME = "locations_sequence";
-
+    
     @Id
     @Valid
     @Schema(name = "location_id")
     @JsonProperty("location_id")
-    private Integer locationId;
+    private BigInteger locationId;
     
     @JsonProperty("opening_hours")
     private OpeningHours openingHours;
@@ -75,10 +72,10 @@ public class Location {
     @Schema(name = "longitude")
     @JsonProperty("longitude")
     private String longitude;
-
+    
     @Schema(name = "saga_status")
     @JsonProperty("saga_status")
     private SagaStatus status;
-
+    
 }
 

@@ -11,21 +11,22 @@ import java.net.URL;
 
 @Log4j2
 public class CurrencyUtility {
-
+    
     private static final String URL = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
-
-    private CurrencyUtility(){
+    
+    private CurrencyUtility() {
         throw new IllegalStateException("Utility class");
     }
+    
     public static Document loadDocument() throws SAXException, IOException, ParserConfigurationException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-
+        
         factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
         factory.setNamespaceAware(true);
-
+        
         return factory.newDocumentBuilder().parse(new URL(URL).openStream());
     }
-
+    
     public static double parseDouble(String strNumber) {
         if (strNumber != null && strNumber.length() > 0) {
             return Double.parseDouble(strNumber);

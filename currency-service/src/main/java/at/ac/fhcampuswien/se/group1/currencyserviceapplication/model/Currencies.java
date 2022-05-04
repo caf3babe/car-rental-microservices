@@ -14,10 +14,10 @@ import java.util.List;
 @NoArgsConstructor
 @Document
 public class Currencies {
-
+    
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date date;
-
+    
     private List<Currency> currencyList;
-
+    
 }
