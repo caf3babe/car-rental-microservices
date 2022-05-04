@@ -52,10 +52,9 @@ public class OpeningHoursService {
                         .anyMatch(openingHours -> openingHours.getOpeningHoursId()
                                 .equals(location.getOpeningHours().getOpeningHoursId()))
         ) {
-            
-            location.setOpeningHours(
-                    openingHoursRepository.findById(location.getOpeningHours().getOpeningHoursId()).get());
-            
+
+            openingHoursRepository.findById(location.getOpeningHours().getOpeningHoursId()).ifPresent(location::setOpeningHours);
+
             publishLocationFinished(location);
             
         } else {

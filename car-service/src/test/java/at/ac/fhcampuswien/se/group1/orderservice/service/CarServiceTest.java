@@ -122,14 +122,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
     
     @Test
     void getCarById_throwsExceptionWhenNotExists() {
-        String id = "30452260786781021453601130959";
+        BigInteger id = new BigInteger("30452260786781021453601130959");
         String exceptionMessage = String.format("Car with id %s could not be found", id);
         
         Mockito.when(carRepository.findById(Mockito.any())).thenThrow(
                 new CarNotFoundException(exceptionMessage)
         );
         
-        Assert.assertThrows(CarNotFoundException.class, () -> carService.getCarById(new BigInteger(id)));
+        Assert.assertThrows(CarNotFoundException.class, () -> carService.getCarById(id));
     }
     
     @Test

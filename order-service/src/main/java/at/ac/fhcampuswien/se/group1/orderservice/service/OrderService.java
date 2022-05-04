@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Log4j2 @RequiredArgsConstructor @Service public class OrderService {
-    
+
     private final OrderRepository orderRepository;
 
     private final ApplicationEventPublisher publisher;
@@ -171,7 +171,7 @@ import java.util.UUID;
             updateOrder.setLocationOfReturn(order.getLocationOfReturn());
             orderRepository.save(updateOrder);
 
-            log.info("Order {} done", updateOrder.getOrderId());
+            log.info("Order updated Status {} done", updateOrder.getOrderId());
 
         } else {
 
@@ -190,11 +190,11 @@ import java.util.UUID;
 
         if (optionalOrder.isPresent()) {
 
-            Order UpdateOrder = optionalOrder.get();
-            UpdateOrder.setStatus(SagaStatus.LOCATION_REJECTED);
-            orderRepository.save(UpdateOrder);
+            Order updateOrder = optionalOrder.get();
+            updateOrder.setStatus(SagaStatus.LOCATION_REJECTED);
+            orderRepository.save(updateOrder);
 
-            log.info("Order {} was canceled - LOCATION_REJECTED", UpdateOrder.getOrderId());
+            log.info("Order {} was canceled - LOCATION_REJECTED", updateOrder.getOrderId());
 
         } else {
 
@@ -217,11 +217,11 @@ import java.util.UUID;
 
             orderRepository.save(updateOrder);
 
-            log.info("Order {} done", updateOrder.getOrderId());
+            log.info("Order updated status success {} done", updateOrder.getOrderId());
 
         } else {
 
-            log.error("Cannot update Order to status {}, Order {} not found", SagaStatus.FINISHED, order);
+            log.error("Cannot update Order to status {}, Order {} not found - status success", SagaStatus.FINISHED, order);
 
         }
     }
@@ -238,11 +238,11 @@ import java.util.UUID;
             updateOrder.setOrderStatus(orderOldStatus);
             orderRepository.save(updateOrder);
 
-            log.info("Order {} done", updateOrder.getOrderId());
+            log.info("Order updated status failure {} done", updateOrder.getOrderId());
 
         } else {
 
-            log.error("Cannot update Order to status {}, Order {} not found", SagaStatus.FINISHED, order);
+            log.error("Cannot update Order to status {}, Order {} not found - status failure", SagaStatus.FINISHED, order);
 
         }
     }
