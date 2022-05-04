@@ -98,10 +98,10 @@ public class CarService {
                                 .equals(order.getCar().getCarId()))
         ) {
 
-
-            order.setCar(carRepository.findById(order.getCar().getCarId()).get());
-
-            publishCarAvailable(order);
+            carRepository.findById(order.getCar().getCarId()).ifPresent(car -> {
+                order.setCar(car);
+                publishCarAvailable(order);
+            });
 
         } else {
             publishCarUnavailable(order);

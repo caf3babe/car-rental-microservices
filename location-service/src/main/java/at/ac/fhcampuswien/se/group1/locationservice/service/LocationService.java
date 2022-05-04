@@ -143,8 +143,9 @@ public class LocationService {
                                 location.getLocationId().equals(order.getLocationOfReturn().getLocationId()))
         ) {
 
-            order.setLocationOfRental(locationRepository.findById(order.getLocationOfRental().getLocationId()).get());
-            order.setLocationOfReturn(locationRepository.findById(order.getLocationOfReturn().getLocationId()).get());
+            locationRepository.findById(order.getLocationOfRental().getLocationId()).ifPresent(order::setLocationOfRental);
+            locationRepository.findById(order.getLocationOfReturn().getLocationId()).ifPresent(order::setLocationOfReturn);
+
             publishLocationExistent(order);
 
         } else {
