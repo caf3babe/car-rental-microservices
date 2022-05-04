@@ -1,6 +1,5 @@
 package at.ac.fhcampuswien.se.group1.orderservice.event.handler;
 
-import at.ac.fhcampuswien.se.group1.orderservice.event.CarAvailableEvent;
 import at.ac.fhcampuswien.se.group1.orderservice.event.CarUnavailableEvent;
 import at.ac.fhcampuswien.se.group1.orderservice.event.LocationExistentEvent;
 import at.ac.fhcampuswien.se.group1.orderservice.event.LocationNonexistentEvent;

@@ -138,25 +138,25 @@ public class OrderController {
      * or Order not found (status code 404)
      * or Validation exception (status code 405)
      */
-//    @Operation(operationId = "updateOrderById", summary = "Update order by Id", tags = {"order"}, responses = {
-//            @ApiResponse(responseCode = "200", description = "Successful operation", content = {
-//                    @Content(mediaType = "application/json", schema = @Schema(implementation = Order.class))}),
-//            @ApiResponse(responseCode = "400", description = "Invalid Order Id", content = {
-//                    @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))}),
-//            @ApiResponse(responseCode = "404", description = "Order not found", content = {
-//                    @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))}),
-//            @ApiResponse(responseCode = "405", description = "Validation exception", content = {
-//                    @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))})},
-//            security = {@SecurityRequirement(name = "bearerAuth")})
-//    // @Secured({"AUTHORITY_ANONYM", "AUTHORITY_ADMINISTRATOR"})
-//    @PutMapping(value = "/order/{id}", produces = {"application/json"}, consumes = {"application/json"})
-//    public ResponseEntity<Order> updateOrderById(
-//            @Parameter(name = "id", description = "The id of the order to update", required = true) @PathVariable("id")
-//                    BigInteger id,
-//            @Parameter(name = "order", description = "Updated order object", required = true) @Valid @RequestBody
-//                    OrderRequest orderRequest) {
-//        return ResponseEntity.ok(orderService.updateOrderById(id, orderRequest));
-//    }
+    @Operation(operationId = "updateOrderById", summary = "Update order by Id", tags = {"order"}, responses = {
+            @ApiResponse(responseCode = "200", description = "Successful operation", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Order.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid Order Id", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))}),
+            @ApiResponse(responseCode = "404", description = "Order not found", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))}),
+            @ApiResponse(responseCode = "405", description = "Validation exception", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))})},
+            security = {@SecurityRequirement(name = "bearerAuth")})
+    // @Secured({"AUTHORITY_ANONYM", "AUTHORITY_ADMINISTRATOR"})
+    @PutMapping(value = "/order/{id}", produces = {"application/json"}, consumes = {"application/json"})
+    public ResponseEntity<Order> updateOrderById(
+            @Parameter(name = "id", description = "The id of the order to update", required = true) @PathVariable("id")
+                    BigInteger id,
+            @Parameter(name = "order", description = "Updated order object", required = true) @Valid @RequestBody
+                    OrderRequest orderRequest) {
+        return ResponseEntity.ok(orderService.updateOrderById(id, orderRequest));
+    }
     
     @Operation(operationId = "updateStatusById", summary = "Update order + car status per Id", tags = {"order"},
             responses = {@ApiResponse(responseCode = "200", description = "Successful operation", content = {

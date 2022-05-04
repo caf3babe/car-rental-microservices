@@ -26,51 +26,8 @@ import java.util.UUID;
     
     private final OrderMapper orderMapper;
 
-    public Order createOrder(OrderRequest orderRequest) {
-
-        return createOrUpdateOrder(orderRequest);
-    }
-    
-    public void deleteOrderById(BigInteger id) {
-        orderRepository.deleteById(id);
-    }
-    
-    public List<Order> getAllOrders() {
-        List<Order> orders = new ArrayList<>();
-        orderRepository.findAll().iterator().forEachRemaining(orders::add);
-        return orders;
-    }
-    
-    public Order getOrderById(BigInteger id) {
-        return orderRepository.findById(id)
-                .orElseThrow(() -> new OrderNotFoundException("Order with id" + id + " could not be found, ok bye."));
-    }
-    
-//    public Order updateOrderById(BigInteger id, OrderRequest orderRequest) {
-//        Order oldOrder = orderRepository.findById(id)
-//                .orElseThrow(() -> new OrderNotFoundException("Order was not found for " + id));
-//        Order newOrder = orderMapper.update(orderRequest, oldOrder);
-//        return createOrUpdateOrder(orderRequest, newOrder);
-//    }
-    
-    public Order updateStatusById(BigInteger id, OrderStatus orderStatus) {
-        Order order = orderRepository.findById(id)
-                .orElseThrow(() -> new OrderNotFoundException("Order was not found for " + id));
-        order.setOrderStatus(orderStatus);
-        // TODO replace with messaging
-        /*
-        Car car = carRepository.findById(order.getCar().getCarId())
-                .orElseThrow(() -> new CarNotFoundException("Car was not found for " + order.getCar().getCarId()));
-        if (orderStatus == OrderStatus.ACTIVE) {
-            car.setCarStatus(CarStatus.RENTED);
-        } else {
-            car.setCarStatus(CarStatus.AVAILABLE);
-        }*/
-        return orderRepository.save(order);
-    }
-    
     @Transactional
-    public Order createOrUpdateOrder(OrderRequest orderRequest) {
+    public Order createOrder(OrderRequest orderRequest) {
 
         Order order = orderMapper.create(orderRequest);
 
@@ -92,16 +49,74 @@ import java.util.UUID;
 
         Order returnOrder = orderRepository.save(order);
 
-        publish(returnOrder);
-        
+        publishCreate(returnOrder);
+
         return returnOrder;
     }
+    
+    public void deleteOrderById(BigInteger id) {
+        orderRepository.deleteById(id);
+    }
+    
+    public List<Order> getAllOrders() {
+        List<Order> orders = new ArrayList<>();
+        orderRepository.findAll().iterator().forEachRemaining(orders::add);
+        return orders;
+    }
+    
+    public Order getOrderById(BigInteger id) {
+        return orderRepository.findById(id)
+                .orElseThrow(() -> new OrderNotFoundException("Order with id" + id + " could not be found, ok bye."));
+    }
 
-    private void publish(Order order) {
+    @Transactional
+    public Order updateOrderById(BigInteger id, OrderRequest orderRequest) {
+        Order oldOrder = orderRepository.findById(id)
+                .orElseThrow(() -> new OrderNotFoundException("Order was not found for " + id));
+        Order updatedOrder = orderMapper.update(orderRequest, oldOrder);
+
+        updatedOrder.setStatus(SagaStatus.CREATED);
+
+        log.info("Updating an order {}", updatedOrder);
+
+        Order returnOrder = orderRepository.save(updatedOrder);
+
+        publishUpdate(returnOrder);
+
+        return returnOrder;
+    }
+    
+    public Order updateStatusById(BigInteger id, OrderStatus orderStatus) {
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new OrderNotFoundException("Order was not found for " + id));
+        order.setOrderStatus(orderStatus);
+        // TODO replace with messaging
+        /*
+        Car car = carRepository.findById(order.getCar().getCarId())
+                .orElseThrow(() -> new CarNotFoundException("Car was not found for " + order.getCar().getCarId()));
+        if (orderStatus == OrderStatus.ACTIVE) {
+            car.setCarStatus(CarStatus.RENTED);
+        } else {
+            car.setCarStatus(CarStatus.AVAILABLE);
+        }*/
+        return orderRepository.save(order);
+    }
+
+    private void publishCreate(Order order) {
 
         OrderCreateEvent event = new OrderCreateEvent(UUID.randomUUID().toString(), order);
 
         log.info("Publishing an Order created event {}", event);
+
+        publisher.publishEvent(event);
+
+    }
+
+    private void publishUpdate(Order order) {
+
+        OrderUpdateEvent event = new OrderUpdateEvent(UUID.randomUUID().toString(), order);
+
+        log.info("Publishing an Order updated event {}", event);
 
         publisher.publishEvent(event);
 

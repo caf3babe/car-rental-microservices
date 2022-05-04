@@ -8,6 +8,5 @@ import lombok.Data;
 @Data
 public class OrderCreateEvent {
     private String transactionId;
-
     private Order order;
 }
