@@ -100,8 +100,7 @@ public class CarController {
             @ApiResponse(responseCode = "400", description = "Invalid Car Id", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))}),
             @ApiResponse(responseCode = "404", description = "Car not found", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))})},
-            security = {@SecurityRequirement(name = "bearerAuth")})
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))})})
     @GetMapping(value = "/car/{id}", produces = {"application/json"})
     public ResponseEntity<Car> getCarById(
             @Parameter(name = "id", description = "The id of the car to retrieve", required = true) @PathVariable("id")
@@ -123,8 +122,7 @@ public class CarController {
                             array = @ArraySchema(schema = @Schema(implementation = Car.class)))}),
             @ApiResponse(responseCode = "204", description = "Successful Operation but no content found"),
             @ApiResponse(responseCode = "400", description = "Invalid car status value", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))})},
-            security = {@SecurityRequirement(name = "bearerAuth")})
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))})})
     @GetMapping(value = "/car/findByStatus", produces = {"application/json"})
     public ResponseEntity<List<Car>> getCarsByStatus(@RequestParam CarStatus carStatus) {
         List<Car> cars = carService.getCarsByStatus(carStatus);
@@ -141,8 +139,7 @@ public class CarController {
             @ApiResponse(responseCode = "200", description = "Successful Operation", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = Car.class)))}),
-            @ApiResponse(responseCode = "204", description = "Successful Operation but no content found")},
-            security = {@SecurityRequirement(name = "bearerAuth")})
+            @ApiResponse(responseCode = "204", description = "Successful Operation but no content found")})
     @GetMapping(value = "/car", produces = {"application/json"})
     public ResponseEntity<List<Car>> getCars(@RequestParam CurrencySymbol currencySymbol) {
         List<Car> cars = carService.getCars(currencySymbol);

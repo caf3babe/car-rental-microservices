@@ -1,4 +1,4 @@
-package at.ac.fhcampuswien.se.group1.carservice.config;
+package at.ac.fhcampuswien.se.group1.authenticationservice.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -21,7 +21,7 @@ public class OpenAPIConfig {
         final String securitySchemeName = "bearerAuth";
         
         final Server server = new Server();
-        server.setUrl("http://localhost:8083/");
+        server.setUrl("http://localhost:8085/");
         
         final List<Server> servers = new ArrayList<>();
         servers.add(server);
@@ -45,9 +45,9 @@ public class OpenAPIConfig {
                 )
                 .info(
                         new Info()
-                                .title("Car Rental Webservice")
+                                .title("Authentication service")
                                 .description(
-                                        "This is the car micro service for the Car Rental Software System. For " +
+                                        "This is the authentication service for the Car Rental Software System. For " +
                                                 "further " +
                                                 "information, please visit our [Wiki](https://se-2022.atlassian" +
                                                 ".net/wiki/)")

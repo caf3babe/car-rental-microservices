@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -169,7 +168,7 @@ public class CurrencyController {
                                     """)
                     },
                             array = @ArraySchema(schema = @Schema(implementation = Currency.class)))
-            })}, security = {@SecurityRequirement(name = "bearerAuth")})
+            })})
     @GetMapping(value = "/currency", produces = {"application/json"})
     public ResponseEntity<List<Currency>> getCurrencies() {
         return ResponseEntity.ok(currencyService.getCurrencies());
