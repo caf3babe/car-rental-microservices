@@ -1,7 +1,7 @@
 FROM maven:3.8.4-openjdk-17-slim as build
 
 COPY . .
-RUN mvn install -DskipTests
+RUN mvn install -q -DskipTests
 
 FROM openjdk:17.0.2-jdk-oraclelinux8
 
