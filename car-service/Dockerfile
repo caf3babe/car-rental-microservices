@@ -10,6 +10,6 @@ LABEL caf3babe=nichil.strasser@stud.fh-campuswien.ac.at
 LABEL schneidermichael=michael.schneider@stud-fh.campusvienna.ac.at
 
 ARG JAR_FILE=target/*.jar
-COPY --from=build ${JAR_FILE} opening-hours-service.jar
+COPY --from=build ${JAR_FILE} car-service.jar
 
-ENTRYPOINT ["java","-jar","/opening-hours-service.jar"]
+ENTRYPOINT ["java","-jar","/car-service.jar"]
