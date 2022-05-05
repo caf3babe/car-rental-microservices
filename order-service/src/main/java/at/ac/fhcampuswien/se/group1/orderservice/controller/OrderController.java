@@ -17,6 +17,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -69,7 +70,7 @@ public class OrderController {
             @ApiResponse(responseCode = "404", description = "Order not found", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))})},
             security = {@SecurityRequirement(name = "bearerAuth")})
-    // @Secured("AUTHORITY_ADMINISTRATOR")
+    @Secured("AUTHORITY_ADMINISTRATOR")
     @DeleteMapping(value = "/order/{id}", produces = {"application/json"})
     public ResponseEntity<Response> deleteOrderById(
             @Parameter(name = "id", description = "The id of the order to update", required = true) @PathVariable("id")
@@ -91,7 +92,7 @@ public class OrderController {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = Order.class)))})},
             security = {@SecurityRequirement(name = "bearerAuth")})
-    // @Secured("AUTHORITY_ADMINISTRATOR")
+    @Secured("AUTHORITY_ADMINISTRATOR")
     @GetMapping(value = "/order", produces = {"application/json"})
     public ResponseEntity<List<Order>> getAllOrders() {
         return ResponseEntity.ok(orderService.getAllOrders());
@@ -114,7 +115,7 @@ public class OrderController {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))})},
             security = {@SecurityRequirement(name = "bearerAuth")})
     @GetMapping(value = "/order/{id}", produces = {"application/json"})
-    // @Secured({"AUTHORITY_ANONYM", "AUTHORITY_ADMINISTRATOR"})
+    @Secured({"AUTHORITY_ANONYM", "AUTHORITY_ADMINISTRATOR"})
     public ResponseEntity<Order> getOrderById(
             @Parameter(name = "id", description = "The id of the order to retrieve", required = true)
             @PathVariable("id") BigInteger id) {
@@ -142,7 +143,7 @@ public class OrderController {
             @ApiResponse(responseCode = "405", description = "Validation exception", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))})},
             security = {@SecurityRequirement(name = "bearerAuth")})
-    // @Secured({"AUTHORITY_ANONYM", "AUTHORITY_ADMINISTRATOR"})
+    @Secured({"AUTHORITY_ANONYM", "AUTHORITY_ADMINISTRATOR"})
     @PutMapping(value = "/order/{id}", produces = {"application/json"}, consumes = {"application/json"})
     public ResponseEntity<Order> updateOrderById(
             @Parameter(name = "id", description = "The id of the order to update", required = true) @PathVariable("id")
@@ -162,7 +163,7 @@ public class OrderController {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = ApiError.class))})},
             security = {@SecurityRequirement(name = "bearerAuth")})
-    // @Secured({"AUTHORITY_ANONYM", "AUTHORITY_ADMINISTRATOR"})
+    @Secured({"AUTHORITY_ANONYM", "AUTHORITY_ADMINISTRATOR"})
     @PutMapping(value = "/order/{id}/{status}", produces = {"application/json"})
     public ResponseEntity<Order> updateStatusById(@PathVariable("id") BigInteger id,
                                                   @PathVariable("status") OrderStatus orderStatus) {
