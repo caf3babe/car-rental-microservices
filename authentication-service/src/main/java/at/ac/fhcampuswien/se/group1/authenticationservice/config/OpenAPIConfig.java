@@ -12,18 +12,16 @@ import java.util.List;
 
 @Configuration
 public class OpenAPIConfig {
-    
-    
+
     @Bean
     public OpenAPI apiInfo() {
 
         final Server server = new Server();
         server.setUrl("http://localhost:8085/");
-        
+
         final List<Server> servers = new ArrayList<>();
         servers.add(server);
-        
-        
+
         return new OpenAPI()
 
                 .servers(
