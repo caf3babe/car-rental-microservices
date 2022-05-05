@@ -1,6 +1,6 @@
 FROM maven:3.8.4-openjdk-17-slim as build
 
-COPY . .
+COPY ../car-service .
 RUN mvn install
 
 FROM openjdk:17.0.2-jdk-oraclelinux8
@@ -10,6 +10,6 @@ LABEL caf3babe=nichil.strasser@stud.fh-campuswien.ac.at
 LABEL schneidermichael=michael.schneider@stud-fh.campusvienna.ac.at
 
 ARG JAR_FILE=target/*.jar
-COPY --from=build ${JAR_FILE} car-service.jar
+COPY --from=build ${JAR_FILE} authentication-service.jar
 
-ENTRYPOINT ["java","-jar","/car-service.jar"]
+ENTRYPOINT ["java","-jar","/authentication-service.jar"]

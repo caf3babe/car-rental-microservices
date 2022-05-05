@@ -45,9 +45,9 @@ public class OpenAPIConfig {
                 )
                 .info(
                         new Info()
-                                .title("Car Rental Webservice")
+                                .title("Car Service")
                                 .description(
-                                        "This is the car micro service for the Car Rental Software System. For " +
+                                        "This is the car service for the Car Rental Software System. For " +
                                                 "further " +
                                                 "information, please visit our [Wiki](https://se-2022.atlassian" +
                                                 ".net/wiki/)")
