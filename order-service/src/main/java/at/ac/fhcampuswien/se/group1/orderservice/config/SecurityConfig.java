@@ -1,7 +1,7 @@
-package at.ac.fhcampuswien.se.group1.authenticationservice.config;
+package at.ac.fhcampuswien.se.group1.orderservice.config;
 
-import at.ac.fhcampuswien.se.group1.authenticationservice.utility.IUserDetailsService;
-import at.ac.fhcampuswien.se.group1.authenticationservice.utility.JwtFilter;
+import at.ac.fhcampuswien.se.group1.orderservice.utility.IUserDetailsService;
+import at.ac.fhcampuswien.se.group1.orderservice.utility.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,8 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-ui/**").permitAll()
                 .antMatchers("/v3/api-docs/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/v1/auth/order").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/v1/auth/admin").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/v1/order").permitAll()
                 .antMatchers(HttpMethod.GET,"/actuator/**").permitAll()
                 .anyRequest().authenticated()
                 .and()

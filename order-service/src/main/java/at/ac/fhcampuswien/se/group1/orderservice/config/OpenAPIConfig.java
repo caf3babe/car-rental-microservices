@@ -1,4 +1,4 @@
-package at.ac.fhcampuswien.se.group1.locationservice.config;
+package at.ac.fhcampuswien.se.group1.orderservice.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -20,7 +20,7 @@ public class OpenAPIConfig {
         final String securitySchemeName = "bearerAuth";
 
         final Server server = new Server();
-        server.setUrl("http://localhost:8082/");
+        server.setUrl("http://localhost:8084/");
         
         final List<Server> servers = new ArrayList<>();
         servers.add(server);
@@ -43,9 +43,9 @@ public class OpenAPIConfig {
                 )
                 .info(
                         new Info()
-                                .title("Location Service")
+                                .title("Order Service")
                                 .description(
-                                        "This is the location service for the Car Rental microservice architecture. " +
+                                        "This is the order service for the Car Rental microservice architecture. " +
                                                 "For further " +
                                                 "information, please visit our [Wiki](https://se-2022.atlassian" +
                                                 ".net/wiki/)")
