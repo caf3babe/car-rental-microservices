@@ -144,8 +144,7 @@ public class LocationController {
             @ApiResponse(responseCode = "400", description = "Invalid Location Id", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))}),
             @ApiResponse(responseCode = "404", description = "Location not found", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))})},
-            security = {@SecurityRequirement(name = "bearerAuth")})
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))})})
     @GetMapping(value = "/location/{id}", produces = {"application/json"})
     public ResponseEntity<Location> getLocationById(
             @Parameter(name = "id", description = "The id of the location to retrieve", required = true)
@@ -211,8 +210,7 @@ public class LocationController {
                                     ]
                                     """)},
                             array = @ArraySchema(schema = @Schema(implementation = Location.class)))}),
-            @ApiResponse(responseCode = "204", description = "Successful Operation but no content found")},
-            security = {@SecurityRequirement(name = "bearerAuth")})
+            @ApiResponse(responseCode = "204", description = "Successful Operation but no content found")})
     @GetMapping(value = "/location", produces = {"application/json"})
     public ResponseEntity<List<Location>> getLocations() {
         List<Location> locations = locationService.getLocations();

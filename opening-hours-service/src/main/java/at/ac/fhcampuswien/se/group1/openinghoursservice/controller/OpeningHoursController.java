@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -67,8 +66,7 @@ public class OpeningHoursController {
                                       "errors": []
                                     }
                                     """)},
-                                    schema = @Schema(implementation = ApiError.class))})},
-            security = {@SecurityRequirement(name = "bearerAuth")})
+                                    schema = @Schema(implementation = ApiError.class))})})
     @GetMapping(value = "/opening-hours/{id}", produces = {"application/json"})
     public ResponseEntity<OpeningHours> getOpeningHoursById(
             @Parameter(name = "id", description = "The id of the opening hours to retrieve", required = true)
@@ -121,8 +119,7 @@ public class OpeningHoursController {
                                     """)
                     },
                             array = @ArraySchema(schema = @Schema(implementation = OpeningHours.class)))}),
-                    @ApiResponse(responseCode = "204", description = "Successful Operation but no content found")},
-            security = {@SecurityRequirement(name = "bearerAuth")})
+                    @ApiResponse(responseCode = "204", description = "Successful Operation but no content found")})
     @GetMapping(value = "/opening-hours", produces = {"application/json"})
     public ResponseEntity<List<OpeningHours>> getAllOpeningHours() {
         List<OpeningHours> openingHours = openingHoursService.getAllOpeningHours();
