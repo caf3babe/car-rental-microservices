@@ -78,3 +78,4 @@ steps:
     args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-zipkin:latest", "./zipkin"]
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-zipkin:latest"]
+timeout: 1h
