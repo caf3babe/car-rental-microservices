@@ -78,4 +78,49 @@ steps:
     args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-zipkin:latest", "./zipkin"]
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-zipkin:latest"]
+
+  - name: 'gcr.io/car-rental-ui/helm'
+    args: [ 'upgrade', '-i', 'prometheus', './prometheus' ]
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
+
+  - name: 'gcr.io/car-rental-ui/helm'
+    args: [ 'upgrade', '-i', 'grafana', '-f', './grafana/helm/values.yaml' ]
+    env:
+      - 'HELM_REPO_URL=https://grafana.github.io/helm-charts'
+      - 'GF_SECURITY_ADMIN_USER=admin'
+      - 'GF_SECURITY_ADMIN_PASSWORD=eFqT8cE6GAcb'
+      - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
+
+  - name: 'gcr.io/car-rental-ui/helm'
+    args: [ 'upgrade', '-i', 'elasticsearch', 'elastic/elasticsearch', '-f', 'elasticsearch/helm/values.yaml' ]
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
+
+  - name: 'gcr.io/car-rental-ui/helm'
+    args: [ 'upgrade', '-i', 'kibana', 'elastic/kibana' ]
+    env:
+      - 'HELM_REPO_URL=https://helm.elastic.co'
+      - 'ELASTICSEARCH_URL="http://elasticsearch:9300"'
+      - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
+
+  - name: 'gcr.io/car-rental-ui/helm'
+    args: [ 'upgrade', '-i', 'zipkin', 'https://financial-times.github.io/zipkin-helm/docs/zipkin-helm-0.1.1.tgz' ]
+    env:
+      - 'HELM_REPO_URL=https://financial-times.github.io/zipkin-helm/docs'
+      - 'STORAGE_TYPE=elasticsearch'
+      - 'ES_HOSTS=elasticsearch:9300'
+      - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
+
+  - name: 'gcr.io/car-rental-ui/helm'
+    args: [ 'upgrade', '-i', 'rabbitmq', './rabbitmq' ]
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
+
 timeout: 1h
