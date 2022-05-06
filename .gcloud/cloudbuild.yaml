@@ -66,7 +66,7 @@ steps:
       - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
 
   - name: 'gcr.io/car-rental-ui/helm'
-    args: [ 'upgrade', '-i', 'grafana', 'bitnami/grafana', '-f', './grafana/helm/values.yaml' ]
+    args: [ 'upgrade', '-i', 'grafana', 'grafana', '-f', './grafana/helm/values.yaml' ]
     env:
       - 'HELM_REPO_URL=https://charts.bitnami.com/bitnami'
       - 'GF_SECURITY_ADMIN_USER=admin'
