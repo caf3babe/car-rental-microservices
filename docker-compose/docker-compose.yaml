@@ -96,12 +96,12 @@ services:
       # HTTP management UI
       - "15672:15672"
     volumes:
-      - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
-      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
+      - ../rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+      - ../rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
     container_name: rabbitmq
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.3
+    image:  docker.elastic.co/elasticsearch/elasticsearch:7.17.3
     environment:
       - node.name=elasticsearch
       - discovery.type=single-node
@@ -132,7 +132,7 @@ services:
     container_name: logstash
     command: logstash -f /etc/logstash/conf.d/logstash.conf
     volumes:
-      - ./logstash:/etc/logstash/conf.d
+      - ../logstash:/etc/logstash/conf.d
     ports:
       - "5005:5005"
 
@@ -143,7 +143,7 @@ services:
       - elasticsearch
     environment:
       - STORAGE_TYPE=elasticsearch
-      - "ES_HOSTS=elasticsearch:9300"
+      - ES_HOSTS=elasticsearch:9300
     ports:
       - "9411:9411"
 

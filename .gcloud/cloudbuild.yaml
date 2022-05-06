@@ -3,35 +3,78 @@ steps:
     args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-api-gateway:latest", "./api-gateway"]
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-api-gateway:latest"]
+
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-authentication-service:latest", "./authentication-service"]
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-authentication-service:latest"]
+
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-car-service:latest", "./car-service"]
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-car-service:latest"]
+
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-configuration-service:latest", "./configuration-service"]
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-configuration-service:latest"]
+
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-currency-service:latest", "./currency-service"]
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-currency-service:latest"]
+
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-discovery-service:latest", "./discovery-service"]
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-discovery-service:latest"]
+
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-location-service:latest", "./location-service"]
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-location-service:latest"]
+
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-opening-hours-service:latest", "./opening-hours-service"]
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-opening-hours-service:latest"]
+
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-order-service:latest", "./order-service"]
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-order-service:latest"]
+
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-elasticsearch:latest", "./elasticsearch"]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-elasticsearch:latest"]
+
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-grafana:latest", "./grafana"]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-grafana:latest"]
+
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-kibana:latest", "./kibana"]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-kibana:latest"]
+
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-logstash:latest", "./logstash"]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-logstash:latest"]
+
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-prometheus:latest", "./prometheus"]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-prometheus:latest"]
+
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-rabbitmq:latest", "./rabbitmq"]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-rabbitmq:latest"]
+
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-zipkin:latest", "./zipkin"]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-zipkin:latest"]
