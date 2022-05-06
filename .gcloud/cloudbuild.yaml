@@ -60,7 +60,7 @@ steps:
     args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-rabbitmq:latest"]
 
   - name: 'gcr.io/car-rental-ui/helm'
-    args: [ 'upgrade', '-i', 'prometheus', './prometheus' ]
+    args: [ 'upgrade', '-i', 'prometheus', './prometheus/helm' ]
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
       - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
@@ -98,7 +98,13 @@ steps:
       - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
 
   - name: 'gcr.io/car-rental-ui/helm'
-    args: [ 'upgrade', '-i', 'rabbitmq', './rabbitmq' ]
+    args: [ 'upgrade', '-i', 'rabbitmq', './rabbitmq/helm' ]
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
+
+  - name: 'gcr.io/car-rental-ui/helm'
+    args: [ 'upgrade', '-i', 'logstash', './logstash/helm' ]
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
       - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
