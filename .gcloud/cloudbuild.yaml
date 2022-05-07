@@ -93,7 +93,7 @@ steps:
       - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
 
   - name: 'gcr.io/car-rental-ui/helm'
-    args: [ 'upgrade', '-i', 'zipkin', 'zipkin/zipkin-helm-0.1.1.tgz' ]
+    args: [ 'upgrade', '-i', 'zipkin', 'zipkin/zipkin-helm' ]
     env:
       - 'HELM_REPO_URL=https://financial-times.github.io/zipkin-helm/docs'
       - 'HELM_REPO_NAME=zipkin'
