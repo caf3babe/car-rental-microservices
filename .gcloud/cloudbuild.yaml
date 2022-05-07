@@ -78,6 +78,8 @@ steps:
   - name: 'gcr.io/car-rental-ui/helm'
     args: [ 'upgrade', '-i', 'elasticsearch', 'elastic/elasticsearch', '-f', 'elasticsearch/helm/values.yaml' ]
     env:
+      - 'HELM_REPO_URL=https://helm.elastic.co'
+      - 'HELM_REPO_NAME=elastic'
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
       - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
 
