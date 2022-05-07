@@ -20,7 +20,7 @@ spec:
     # The ACME server URL
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     # Email address used for ACME registration
-    email: starv0411@gmail.com # Update to yours
+    email: starv0411@gmail.com
     # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
       name: letsencrypt-staging
@@ -46,10 +46,10 @@ metadata:
   labels:
     app: car-rental-v2
 spec:
-  tls: # < placing a host in the TLS config will indicate a certificate should be created
+  tls:
   - hosts:
     - v2.se.transfer-vienna.com
-    secretName: car-rental-v2-secret # < cert-manager will store the created certificate in this secret
+    secretName: car-rental-v2-secret
   rules:
   - host: v2.se.transfer-vienna.com
 #    http:
