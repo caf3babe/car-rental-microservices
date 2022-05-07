@@ -18,4 +18,5 @@ TAG="gcr.io/car-rental-ui/car-rental-microservices-${APP}:latest"
 
 docker build -t "${TAG}" "${APP}"
 docker push "${TAG}"
+
 helm upgrade -i "${APP}" "${APP}/helm"
