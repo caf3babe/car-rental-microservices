@@ -31,10 +31,10 @@ public class CarService {
 
     public Car createCar(CarRequest carRequest) {
         Car car = carMapper.create(carRequest);
-        log.debug("Service Mapped Car: [{}]", car);
+        log.info("Service Mapped Car: [{}]", car);
 
         Car savedCar = carRepository.save(car);
-        log.debug("Saved Car: [{}]", savedCar);
+        log.info("Saved Car: [{}]", savedCar);
 
         return savedCar;
     }
