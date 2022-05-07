@@ -1,6 +1,8 @@
 package at.ac.fhcampuswien.se.group1.orderservice.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +27,7 @@ public class Order {
     @Id
     @Schema(name = "order_id", required = true)
     @JsonProperty("orderId")
+    @JsonSerialize(using = ToStringSerializer.class)
     private BigInteger orderId;
     
     @Valid
