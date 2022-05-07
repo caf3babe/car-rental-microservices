@@ -48,4 +48,4 @@ env:
   - name: spring_profiles_active
     value: "prod"
   - name: spring_cloud_config_uri
-    value: http://configuration-service:8070
+    value: http://configuration-service:8071
