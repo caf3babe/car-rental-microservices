@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+set -e
+
+APP=$1
+
+if [ -z "${APP}" ]; then
+  echo "Error: first argument missing"
+  exit 1;
+fi
+
+if [ ! -d "$APP" ]; then
+  echo "Error: directory $APP does not exist"
+  exit 1;
+fi
+
+TAG="gcr.io/car-rental-ui/car-rental-microservices-${APP}:latest"
+
+docker build -t "${TAG}" "${APP}"
+docker push "${TAG}"
+helm upgrade -i "${APP}" "${APP}/helm"
