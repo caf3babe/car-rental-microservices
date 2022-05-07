@@ -45,11 +45,6 @@ spec:
             httpGet:
               path: /actuator/health/readiness
               port: http
-          env:
-            {{- range .Values.env }}
-            - name: {{ .name }}
-              value: {{ .value }}
-            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -64,4 +59,3 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-
