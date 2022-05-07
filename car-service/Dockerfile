@@ -14,4 +14,4 @@ COPY --from=build ${JAR_FILE} car-service.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","/car-service.jar", "--spring.profiles.active=prod", "spring.cloud.config.uri=http://configuration-service:8080"]
+ENTRYPOINT ["java","-jar","/car-service.jar"]
