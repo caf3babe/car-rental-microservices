@@ -39,11 +39,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /actuator/health/liveness
               port: 9090
           readinessProbe:
             httpGet:
-              path: /
+              path: /actuator/health/readiness
               port: 9090
       {{- with .Values.nodeSelector }}
       nodeSelector:

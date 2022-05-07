@@ -12,4 +12,6 @@ LABEL schneidermichael=michael.schneider@stud-fh.campusvienna.ac.at
 ARG JAR_FILE=target/*.jar
 COPY --from=build ${JAR_FILE} configuration-service.jar
 
+EXPOSE 8080
+
 ENTRYPOINT ["java","-jar","/configuration-service.jar"]
