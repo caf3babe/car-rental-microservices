@@ -1,0 +1,624 @@
+{
+	"info": {
+		"_postman_id": "95d842f8-c1be-4e51-bb54-3734b25db0bb",
+		"name": "car-microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "authentication-service",
+			"item": [
+				{
+					"name": "auth - admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin\",\n  \"password\": \"admin123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/authentication-service/api/v1/auth/admin",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"authentication-service",
+								"api",
+								"v1",
+								"auth",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth - order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"order_id\": 1,\n  \"last_name\": \"Muster\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/authentication-service/api/v1/auth/order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"authentication-service",
+								"api",
+								"v1",
+								"auth",
+								"order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "opening-hours-service",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/opening-hours-service/api/v1/opening-hours",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"opening-hours-service",
+								"api",
+								"v1",
+								"opening-hours"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/opening-hours-service/api/v1/opening-hours/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"opening-hours-service",
+								"api",
+								"v1",
+								"opening-hours",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "location-service",
+			"item": [
+				{
+					"name": "getById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/location-service/api/v1/location/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"location-service",
+								"api",
+								"v1",
+								"location",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"location_name\": \"Linz Hauptbahnhof\",\n  \"street_name\": \"Bahnhofplatz\",\n  \"street_number\": \"3-6\",\n  \"city_name\": \"Linz\",\n  \"postal_code\": 4020,\n  \"email\": \"linz@oebb.at\",\n  \"phone\": \"06606333209\",\n  \"latitude\": \"20.21238798787\",\n  \"longitude\": \"43.09835465467\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/location-service/api/v1/location/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"location-service",
+								"api",
+								"v1",
+								"location",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/location-service/api/v1/location/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"location-service",
+								"api",
+								"v1",
+								"location",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/location-service/api/v1/location",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"location-service",
+								"api",
+								"v1",
+								"location"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"opening_hours_id\": 1,\n  \"location_name\": \"Linz Hauptbahnhof\",\n  \"street_name\": \"Bahnhofplatz\",\n  \"street_number\": \"3-6\",\n  \"city_name\": \"Linz\",\n  \"postal_code\": 4020,\n  \"email\": \"linz@oebb.at\",\n  \"phone\": \"06606333209\",\n  \"latitude\": \"20.21238798787\",\n  \"longitude\": \"43.09835465467\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/location-service/api/v1/location",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"location-service",
+								"api",
+								"v1",
+								"location"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "car-service",
+			"item": [
+				{
+					"name": "getById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/car-service/api/v1/car/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"car-service",
+								"api",
+								"v1",
+								"car",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"car_status\": \"AVAILABLE\",\n  \"chassis_number\": \"W0L000051T2123456\",\n  \"manufacturer\": \"Audi\",\n  \"construction_year\": \"2022-05-07\",\n  \"color\": \"Black\",\n  \"model\": \"TT\",\n  \"model_series\": \"Coupé\",\n  \"engine_fuel\": \"Diesel\",\n  \"engine_fuel_consumption\": 3.5,\n  \"engine_performance\": 300,\n  \"engine_type\": \"Hybrid\",\n  \"gear_type\": \"automatic\",\n  \"adblue\": false,\n  \"seats\": 2,\n  \"price\": 65000,\n  \"currency_symbol\": \"USD\",\n  \"picture_link\": \"https://www.auto-data.net/en/audi-tt-rs-roadster-8s-facelift-2019-generation-7105#image8\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/car-service/api/v1/car/0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"car-service",
+								"api",
+								"v1",
+								"car",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/car-service/api/v1/car/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"car-service",
+								"api",
+								"v1",
+								"car",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "currencySymbol",
+									"value": "USD",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/car-service/api/v1/car",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"car-service",
+								"api",
+								"v1",
+								"car"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"car_status\": \"AVAILABLE\",\n  \"chassis_number\": \"W0L000051T2123456\",\n  \"manufacturer\": \"Audi\",\n  \"construction_year\": \"2022-05-07\",\n  \"color\": \"Black\",\n  \"model\": \"TT\",\n  \"model_series\": \"Coupé\",\n  \"engine_fuel\": \"Diesel\",\n  \"engine_fuel_consumption\": 3.5,\n  \"engine_performance\": 300,\n  \"engine_type\": \"Hybrid\",\n  \"gear_type\": \"automatic\",\n  \"adblue\": false,\n  \"seats\": 2,\n  \"price\": 65000,\n  \"currency_symbol\": \"USD\",\n  \"picture_link\": \"https://www.auto-data.net/en/audi-tt-rs-roadster-8s-facelift-2019-generation-7105#image8\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/car-service/api/v1/car",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"car-service",
+								"api",
+								"v1",
+								"car"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findByStatus",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "carStatus",
+									"value": "AVAILABLE",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/car-service/api/v1/car/findByStatus",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"car-service",
+								"api",
+								"v1",
+								"car",
+								"findByStatus"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order-service",
+			"item": [
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/order-service/api/v1/order/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order-service",
+								"api",
+								"v1",
+								"order",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"car_id\": 1,\n  \"location_of_rental_id\": 1,\n  \"location_of_return_id\": 1,\n  \"date_of_booking\": \"2022-05-07\",\n  \"date_of_rental\": \"2022-05-07\",\n  \"date_of_return\": \"2022-05-07\",\n  \"method_of_payment\": \"DINERS_CLUB\",\n  \"card_number\": \"4274323216727548\",\n  \"card_security_code\": \"976\",\n  \"valid_until\": \"2022-05-07T15:12:18.951Z\",\n  \"first_name\": \"Max\",\n  \"last_name\": \"Schneider\",\n  \"email\": \"max.schneider@outlook.com\",\n  \"order_status\": \"CREATED\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/order-service/api/v1/order/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order-service",
+								"api",
+								"v1",
+								"order",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/order-service/api/v1/order/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order-service",
+								"api",
+								"v1",
+								"order",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/order-service/api/v1/order/1/ACTIVE",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order-service",
+								"api",
+								"v1",
+								"order",
+								"1",
+								"ACTIVE"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/order-service/api/v1/order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order-service",
+								"api",
+								"v1",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/order-service/api/v1/order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order-service",
+								"api",
+								"v1",
+								"order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8072",
+			"type": "string"
+		}
+	]
+}
