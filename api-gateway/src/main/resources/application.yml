@@ -1,6 +1,19 @@
 spring:
+  config:
+    location: http://localhost:8071
+  application:
+    name: authentication-service
+  profiles:
+    active: dev
   cloud:
     gateway:
       discovery.locator:
         enabled: true
         lowerCaseServiceId: true
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+server:
+  port: 8079

@@ -119,6 +119,17 @@ services:
       - "9200:9200"
     container_name: elasticsearch
 
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    depends_on:
+      - elasticsearch
+    environment:
+      - STORAGE_TYPE=elasticsearch
+      - ES_HOSTS=elasticsearch:9300
+    ports:
+      - "9411:9411"
+
   kibana:
     image: docker.elastic.co/kibana/kibana:7.17.3
     environment:
@@ -135,16 +146,3 @@ services:
       - ../logstash:/etc/logstash/conf.d
     ports:
       - "5005:5005"
-
-  zipkin:
-    image: openzipkin/zipkin
-    container_name: zipkin
-    depends_on:
-      - elasticsearch
-    environment:
-      - STORAGE_TYPE=elasticsearch
-      - ES_HOSTS=elasticsearch:9300
-    ports:
-      - "9411:9411"
-
-

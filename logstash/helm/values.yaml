@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   repository: gcr.io/car-rental-ui/car-rental-microservices-logstash:latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   tag: ""
 imagePullSecrets: []
 nameOverride: ""
