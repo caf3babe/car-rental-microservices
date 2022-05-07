@@ -81,10 +81,6 @@ tolerations: []
 
 affinity: {}
 
-env:
-  - name: spring_profiles_active
-    value: "prod"
-
 mongodb:
   enabled: true
   auth:
@@ -92,3 +88,9 @@ mongodb:
   service:
     port: 27017
     portName: car-db
+
+env:
+  - name: spring_profiles_active
+    value: "prod"
+  - name: spring_cloud_config_uri
+    value: http://configuration-service:8071
