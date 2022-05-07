@@ -2,7 +2,7 @@ spring:
   config:
     location: http://localhost:8071
   application:
-    name: authentication-service
+    name: api-gateway
   profiles:
     active: dev
   cloud:
