@@ -69,6 +69,7 @@ steps:
     args: [ 'upgrade', '-i', 'grafana', 'bitnami/grafana' ]
     env:
       - 'HELM_REPO_URL=https://charts.bitnami.com/bitnami'
+      - 'HELM_REPO_NAME=bitnami'
       - 'GF_SECURITY_ADMIN_USER=admin'
       - 'GF_SECURITY_ADMIN_PASSWORD=eFqT8cE6GAcb'
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
@@ -84,14 +85,16 @@ steps:
     args: [ 'upgrade', '-i', 'kibana', 'elastic/kibana' ]
     env:
       - 'HELM_REPO_URL=https://helm.elastic.co'
+      - 'HELM_REPO_NAME=elastic'
       - 'ELASTICSEARCH_URL="http://elasticsearch:9300"'
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
       - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
 
   - name: 'gcr.io/car-rental-ui/helm'
-    args: [ 'upgrade', '-i', 'zipkin', 'https://financial-times.github.io/zipkin-helm/docs/zipkin-helm-0.1.1.tgz' ]
+    args: [ 'upgrade', '-i', 'zipkin', 'zipkin/zipkin-helm-0.1.1.tgz' ]
     env:
       - 'HELM_REPO_URL=https://financial-times.github.io/zipkin-helm/docs'
+      - 'HELM_REPO_NAME=zipkin'
       - 'STORAGE_TYPE=elasticsearch'
       - 'ES_HOSTS=elasticsearch:9300'
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
