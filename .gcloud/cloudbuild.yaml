@@ -72,16 +72,12 @@ steps:
       - 'HELM_REPO_NAME=bitnami'
       - 'GF_SECURITY_ADMIN_USER=admin'
       - 'GF_SECURITY_ADMIN_PASSWORD=eFqT8cE6GAcb'
-      - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
 
   - name: 'gcr.io/car-rental-ui/helm'
     args: [ 'upgrade', '-i', 'elasticsearch', 'elastic/elasticsearch', '-f', 'elasticsearch/helm/values.yaml' ]
     env:
       - 'HELM_REPO_URL=https://helm.elastic.co'
       - 'HELM_REPO_NAME=elastic'
-      - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
 
   - name: 'gcr.io/car-rental-ui/helm'
     args: [ 'upgrade', '-i', 'kibana', 'elastic/kibana' ]
@@ -89,8 +85,6 @@ steps:
       - 'HELM_REPO_URL=https://helm.elastic.co'
       - 'HELM_REPO_NAME=elastic'
       - 'ELASTICSEARCH_URL="http://elasticsearch:9300"'
-      - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
 
   - name: 'gcr.io/car-rental-ui/helm'
     args: [ 'upgrade', '-i', 'zipkin', 'zipkin/zipkin-helm' ]
@@ -99,19 +93,21 @@ steps:
       - 'HELM_REPO_NAME=zipkin'
       - 'STORAGE_TYPE=elasticsearch'
       - 'ES_HOSTS=elasticsearch:9300'
-      - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
 
   - name: 'gcr.io/car-rental-ui/helm'
     args: [ 'upgrade', '-i', 'rabbitmq', './rabbitmq/helm' ]
-    env:
-      - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
 
   - name: 'gcr.io/car-rental-ui/helm'
     args: [ 'upgrade', '-i', 'logstash', './logstash/helm' ]
-    env:
-      - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
+
+  - name: 'gcr.io/car-rental-ui/helm'
+    args: [ 'upgrade', '-i', 'configuration-service', './configuration-service/helm' ]
+
+  - name: 'gcr.io/car-rental-ui/helm'
+    args: [ 'upgrade', '-i', 'discovery-service', './discovery-service/helm' ]
+
+  - name: 'gcr.io/car-rental-ui/helm'
+    args: [ 'upgrade', '-i', 'api-gateway', './api-gateway/helm' ]
+
 
 timeout: 1h
