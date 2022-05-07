@@ -7,6 +7,17 @@ spring:
     active: dev
   cloud:
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTION
       discovery.locator:
         enabled: true
         lowerCaseServiceId: true
