@@ -6,8 +6,8 @@ on:
   push:
     branches: [ main ]
     paths:
-      - ${{ env.MICRO_SERVICE}}/**
-      - .github/workflows/${{ env.MICRO_SERVICE}}.yml
+      - currency-service/**
+      - .github/workflows/currency-service.yml
 jobs:
   deploy:
 
