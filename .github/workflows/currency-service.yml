@@ -6,7 +6,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - $MICRO_SERVICE
+      - ${{ env.MICRO_SERVICE}}
 jobs:
   deploy:
 
@@ -31,6 +31,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: $MICRO_SERVICE
+          context: ${{ env.MICRO_SERVICE }}
           push: true
-          tags: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}-$MICRO_SERVICE
+          tags: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}-${{ env.MICRO_SERVICE }}
