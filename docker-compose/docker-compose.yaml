@@ -143,6 +143,6 @@ services:
     container_name: logstash
     command: logstash -f /etc/logstash/conf.d/logstash.conf
     volumes:
-      - ../logstash:/etc/logstash/conf.d
+      - ./logstash:/etc/logstash/conf.d
     ports:
       - "5005:5005"
