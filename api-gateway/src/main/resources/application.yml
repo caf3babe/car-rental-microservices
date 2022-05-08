@@ -19,7 +19,7 @@ spring:
               - DELETE
               - OPTION
       discovery.locator:
-        enabled: true
+        enabled: false
         lowerCaseServiceId: true
 
 management:
