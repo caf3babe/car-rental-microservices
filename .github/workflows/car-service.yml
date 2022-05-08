@@ -1,4 +1,4 @@
-name: "Currency Service"
+name: "Car Service"
 
 env:
   MICRO_SERVICE: car-service

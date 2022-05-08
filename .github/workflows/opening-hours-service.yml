@@ -1,4 +1,4 @@
-name: "Currency Service"
+name: "Opening Hours Service"
 
 env:
   MICRO_SERVICE: opening-hours-service

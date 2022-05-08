@@ -1,13 +1,13 @@
-name: "Location Service"
+name: "API Gateway"
 
 env:
-  MICRO_SERVICE: location-service
+  MICRO_SERVICE: api-gateway
 on:
   push:
     branches: [ main ]
     paths:
-      - location-service/**
-      - .github/workflows/location-service.yml
+      - api-gateway/**
+      - .github/workflows/api-gateway.yml
 jobs:
   deploy:
 

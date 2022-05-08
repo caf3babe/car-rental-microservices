@@ -1,13 +1,13 @@
-name: "Location Service"
+name: "Configuration Service"
 
 env:
-  MICRO_SERVICE: location-service
+  MICRO_SERVICE: configuration-service
 on:
   push:
     branches: [ main ]
     paths:
-      - location-service/**
-      - .github/workflows/location-service.yml
+      - configuration-service/**
+      - .github/workflows/configuration-service.yml
 jobs:
   deploy:
 
