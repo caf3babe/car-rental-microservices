@@ -1,4 +1,4 @@
-name: "Currency Service"
+name: "Order Service"
 
 env:
   MICRO_SERVICE: order-service
