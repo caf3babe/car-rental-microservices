@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository:
+  repository: gcr.io/car-rental-ui/car-rental-microservices-location-service:latest
   pullPolicy: Always
   tag: ""
 
