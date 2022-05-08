@@ -5,7 +5,7 @@ env:
   GITHUB_REF: ${{ github.ref }}
   REGISTRY_HOSTNAME: gcr.io
   MICRO_SERVICE: currency-service
-  IMAGE: ${{ REGISTRY_HOSTNAME }}/${{ secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}-${{ env.MICRO_SERVICE }}
+  IMAGE: ${{ env.REGISTRY_HOSTNAME }}/${{ secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}-${{ env.MICRO_SERVICE }}
 on:
   push:
     branches: [ main ]
@@ -33,4 +33,4 @@ jobs:
         with:
           context: ${{ env.MICRO_SERVICE }}
           push: true
-          tags: ${{ IMAGE }}
+          tags: ${{ env.IMAGE }}
