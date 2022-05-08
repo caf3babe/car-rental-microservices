@@ -109,5 +109,22 @@ steps:
   - name: 'gcr.io/car-rental-ui/helm'
     args: [ 'upgrade', '-i', 'api-gateway', './api-gateway/helm' ]
 
+  - name: 'gcr.io/car-rental-ui/helm'
+    args: [ 'upgrade', '-i', 'authentication-service', './authentication-service/helm' ]
+
+  - name: 'gcr.io/car-rental-ui/helm'
+    args: [ 'upgrade', '-i', 'car-service', './car-service/helm' ]
+
+  - name: 'gcr.io/car-rental-ui/helm'
+    args: [ 'upgrade', '-i', 'currency-service', './currency-service/helm' ]
+
+  - name: 'gcr.io/car-rental-ui/helm'
+    args: [ 'upgrade', '-i', 'opening-hours-service', './opening-hours-service/helm' ]
+
+  - name: 'gcr.io/car-rental-ui/helm'
+    args: [ 'upgrade', '-i', 'location-service', './location-service/helm' ]
+
+  - name: 'gcr.io/car-rental-ui/helm'
+    args: [ 'upgrade', '-i', 'order-service', './order-service/helm' ]
 
 timeout: 1h

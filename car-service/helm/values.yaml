@@ -81,14 +81,6 @@ tolerations: []
 
 affinity: {}
 
-mongodb:
-  enabled: true
-  auth:
-    rootPassword: example
-  service:
-    port: 27017
-    portName: car-db
-
 env:
   - name: spring_profiles_active
     value: "prod"

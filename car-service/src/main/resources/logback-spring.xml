@@ -3,7 +3,12 @@
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <springProperty scope="context" name="application_name" source="spring.application.name"/>
     <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>localhost:5005</destination>
+        <springProfile name="dev">
+            <destination>localhost:5005</destination>
+        </springProfile>
+        <springProfile name="prod">
+            <destination>logstash:5005</destination>
+        </springProfile>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
     </appender>
     <root level="INFO">

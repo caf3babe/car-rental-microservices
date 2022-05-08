@@ -1,0 +1,5 @@
+service:
+  ports:
+    mongodb: 28083
+auth:
+  rootPassword: example

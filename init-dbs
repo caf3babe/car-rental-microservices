@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+set -e
+
+for DIR in mongodbs/* ; do
+  POD_NAME="${DIR##*/}"
+  echo "Helm upgrading ${POD_NAME}"
+  helm upgrade -i "${POD_NAME}-service-db" bitnami/mongodb -f "${DIR}"/values.yaml
+done
