@@ -20,7 +20,7 @@ steps:
       - 'HELM_REPO_NAME=elastic'
 
   - name: 'gcr.io/car-rental-ui/helm'
-    args: [ 'upgrade', '-i', 'logstash', 'logstash/elasticsearch' ]
+    args: [ 'upgrade', '-i', 'logstash', 'elastic/logstash' ]
 
   - name: 'gcr.io/car-rental-ui/helm'
     args: [ 'upgrade', '-i', 'kibana', 'elastic/kibana' ]
