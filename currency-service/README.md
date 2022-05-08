@@ -1,4 +1,4 @@
-# currency-service
+# Currency Service
 
 ## Swagger
 
@@ -7,8 +7,4 @@
 ## Actuator
 
 * http://localhost:8080/actuator
-
-
-
-
 
