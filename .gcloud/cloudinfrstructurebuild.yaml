@@ -1,0 +1,16 @@
+- name: "gcr.io/cloud-builders/docker"
+  args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-prometheus:latest", "./prometheus"]
+- name: "gcr.io/cloud-builders/docker"
+  args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-prometheus:latest"]
+
+- name: "gcr.io/cloud-builders/docker"
+  args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-logstash:latest", "./logstash"]
+- name: "gcr.io/cloud-builders/docker"
+  args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-logstash:latest"]
+
+- name: "gcr.io/cloud-builders/docker"
+  args: ["build", "-t", "gcr.io/car-rental-ui/car-rental-microservices-rabbitmq:latest", "./rabbitmq"]
+- name: "gcr.io/cloud-builders/docker"
+  args: ["push", "gcr.io/car-rental-ui/car-rental-microservices-rabbitmq:latest"]
+
+timeout: 1h

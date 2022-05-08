@@ -22,11 +22,4 @@ volumeClaimTemplate:
     requests:
       storage: 100M
 
-node:
-  name: elasticsearch
-discovery:
-  type: single-node
-cluster:
-  name: car-rental-v2
-bootstrap:
-  memory_lock: true
+clusterName: car-rental-v2

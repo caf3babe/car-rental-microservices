@@ -1,0 +1,40 @@
+- name: 'gcr.io/car-rental-ui/helm'
+  args: [ 'upgrade', '-i', 'prometheus', './prometheus/helm' ]
+  env:
+    - 'CLOUDSDK_COMPUTE_ZONE=europe-west6-b'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=car-rental-v2'
+
+- name: 'gcr.io/car-rental-ui/helm'
+  args: [ 'upgrade', '-i', 'grafana', 'bitnami/grafana' ]
+  env:
+    - 'HELM_REPO_URL=https://charts.bitnami.com/bitnami'
+    - 'HELM_REPO_NAME=bitnami'
+    - 'GF_SECURITY_ADMIN_USER=admin'
+    - 'GF_SECURITY_ADMIN_PASSWORD=eFqT8cE6GAcb'
+
+- name: 'gcr.io/car-rental-ui/helm'
+  args: [ 'upgrade', '-i', 'elasticsearch', 'elastic/elasticsearch', '-f', 'elasticsearch/helm/values.yaml' ]
+  env:
+    - 'HELM_REPO_URL=https://helm.elastic.co'
+    - 'HELM_REPO_NAME=elastic'
+
+- name: 'gcr.io/car-rental-ui/helm'
+  args: [ 'upgrade', '-i', 'logstash', 'logstash/elasticsearch' ]
+
+- name: 'gcr.io/car-rental-ui/helm'
+  args: [ 'upgrade', '-i', 'kibana', 'elastic/kibana' ]
+  env:
+    - 'ELASTICSEARCH_URL="http://elasticsearch-master:9300"'
+
+- name: 'gcr.io/car-rental-ui/helm'
+  args: [ 'upgrade', '-i', 'zipkin', 'zipkin/zipkin-helm' ]
+  env:
+    - 'HELM_REPO_URL=https://financial-times.github.io/zipkin-helm/docs'
+    - 'HELM_REPO_NAME=zipkin'
+    - 'STORAGE_TYPE=elasticsearch'
+    - 'ES_HOSTS=elasticsearch:9300'
+
+- name: 'gcr.io/car-rental-ui/helm'
+  args: [ 'upgrade', '-i', 'rabbitmq', './rabbitmq/helm' ]
+
+timeout: 1h
