@@ -1,8 +1,5 @@
-rabbitmq:
-  loadDefinition:
-    enabled: true
-    secretName: rabbitmq-load-definition
-  extraConfiguration:
-    management.load_definitions = /app/load_definition.json
-  username: admin
-  password: secretpassword
+loadDefinition:
+  enabled: true
+  existingSecret: rabbitmq-load-definition
+extraConfiguration:
+  management.load_definitions = /app/load_definition.json

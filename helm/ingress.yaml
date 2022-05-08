@@ -1,0 +1,30 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: default-ingress
+  labels:
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/instance: nginx
+    app.kubernetes.io/managed-by: nginx
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, OPTIONS, DELETE"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+spec:
+  tls:
+    - hosts:
+        - asdfasdf
+      secretName: .my-host
+  rules:
+    - host: asdfasdf
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: https
+              servicePort: 443

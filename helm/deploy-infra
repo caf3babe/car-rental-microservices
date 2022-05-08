@@ -1,12 +1,15 @@
 #!/usr/bin/env sh
 
+set -e
 
 helm repo add elastic https://helm.elastic.co
+helm repo add bitnami https://charts.bitnami.com/bitnami
+
+
 helm install elasticsearch elastic/elasticsearch -f helm/elasticsearch/values.yaml
 helm install kibana elastic/kibana
 helm install logstash elastic/logstash -f helm/logstash/values.yaml
 
-helm repo add bitnami https://charts.bitnami.com/bitnami
+kubectl apply -f rabbitmq/secret-definition.yaml && helm install rabbitmq bitnami/rabbitmq -f rabbitmq/values.yaml
 
-kubectl apply -f rabbitmq/secret-definition.yaml
-helm install rabbitmq bitnami/rabbitmq -f rabbitmq/values.yaml
+kubectl apply -f zipkin/deployment.yaml
