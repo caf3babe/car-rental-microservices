@@ -21,5 +21,3 @@ volumeClaimTemplate:
   resources:
     requests:
       storage: 100M
-
-clusterName: car-rental-v2
