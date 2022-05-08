@@ -41,12 +41,12 @@ spec:
             httpGet:
               path: /actuator/health/liveness
               port: 8080
-            initialDelaySeconds: 120
+            initialDelaySeconds: 30
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
               port: 8080
-            initialDelaySeconds: 120
+            initialDelaySeconds: 30
           env:
             {{- range .Values.env }}
             - name: {{ .name }}
