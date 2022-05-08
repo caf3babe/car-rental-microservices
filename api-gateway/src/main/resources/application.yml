@@ -19,7 +19,7 @@ spring:
               - DELETE
               - OPTION
       discovery.locator:
-        enabled: true
+        enabled: false
         lowerCaseServiceId: true
 
 management:
@@ -34,7 +34,7 @@ management:
 server:
   port: 8079
 
-logging:
-  level:
-    org.springframework.cloud.gateway: DEBUG
-    reactor.netty.http.client: DEBUG
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: DEBUG
+#    reactor.netty.http.client: DEBUG
