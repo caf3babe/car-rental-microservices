@@ -49,11 +49,3 @@ env:
     value: "prod"
   - name: spring_cloud_config_uri
     value: http://configuration-service:8071
-
-mongodb:
-  enabled: true
-  auth:
-    rootPassword: example
-  service:
-    port: 28084
-    portName: authentication-db
