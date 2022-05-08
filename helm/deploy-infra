@@ -2,9 +2,9 @@
 
 
 helm repo add elastic https://helm.elastic.co
-helm install elasticsearch elastic/elasticsearch -f elasticsearch/helm/values.yaml
+helm install elasticsearch elastic/elasticsearch -f helm/elasticsearch/values.yaml
 helm install kibana elastic/kibana
-helm install logstash elastic/logstash
+helm install logstash elastic/logstash -f helm/logstash/values.yaml
 
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
