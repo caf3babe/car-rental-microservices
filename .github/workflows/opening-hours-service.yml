@@ -1,13 +1,13 @@
-name: "Currency Service"
+name: "Opening Hours Service"
 
 env:
-  MICRO_SERVICE: currency-service
+  MICRO_SERVICE: opening-hours-service
 on:
   push:
     branches: [ main ]
     paths:
-      - currency-service/**
-      - .github/workflows/currency-service.yml
+      - opening-hours-service/**
+      - .github/workflows/opening-hours-service.yml
 jobs:
   deploy:
 

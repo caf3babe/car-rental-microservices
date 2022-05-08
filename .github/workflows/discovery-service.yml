@@ -1,13 +1,13 @@
-name: "Currency Service"
+name: "Discovery Service"
 
 env:
-  MICRO_SERVICE: currency-service
+  MICRO_SERVICE: discovery-service
 on:
   push:
     branches: [ main ]
     paths:
-      - currency-service/**
-      - .github/workflows/currency-service.yml
+      - discovery-service/**
+      - .github/workflows/discovery-service.yml
 jobs:
   deploy:
 

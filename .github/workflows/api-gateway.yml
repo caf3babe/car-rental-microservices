@@ -1,13 +1,13 @@
-name: "Currency Service"
+name: "API Gateway"
 
 env:
-  MICRO_SERVICE: currency-service
+  MICRO_SERVICE: api-gateway
 on:
   push:
     branches: [ main ]
     paths:
-      - currency-service/**
-      - .github/workflows/currency-service.yml
+      - api-gateway/**
+      - .github/workflows/api-gateway.yml
 jobs:
   deploy:
 

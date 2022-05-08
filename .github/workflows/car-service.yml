@@ -1,13 +1,13 @@
-name: "Currency Service"
+name: "Car Service"
 
 env:
-  MICRO_SERVICE: currency-service
+  MICRO_SERVICE: car-service
 on:
   push:
     branches: [ main ]
     paths:
-      - currency-service/**
-      - .github/workflows/currency-service.yml
+      - car-service/**
+      - .github/workflows/car-service.yml
 jobs:
   deploy:
 
