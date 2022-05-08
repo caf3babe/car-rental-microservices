@@ -7,6 +7,7 @@ on:
     branches: [ main ]
     paths:
       - ${{ env.MICRO_SERVICE}}/**
+      - ./github/workflows/${{ env.MICRO_SERVICE}}.yml
 jobs:
   deploy:
 
