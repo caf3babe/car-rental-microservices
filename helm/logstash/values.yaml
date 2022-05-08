@@ -1,0 +1,20 @@
+logstashPipeline:
+  logstash.conf: |-
+    input {
+      tcp {
+        port => 5005
+        codec => json_lines
+      }
+    }
+
+    filter {
+      mutate {
+        add_tag => [ "car-rental-microservices" ]
+      }
+    }
+
+    output {
+      elasticsearch {
+        hosts => "elasticsearch-master:9200"
+      }
+    }
