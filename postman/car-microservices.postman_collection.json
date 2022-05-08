@@ -23,12 +23,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/authentication-service/api/v1/auth/admin",
+							"raw": "{{base_url}}/api/v1/auth/admin",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"authentication-service",
 								"api",
 								"v1",
 								"auth",
@@ -79,12 +78,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/opening-hours-service/api/v1/opening-hours",
+							"raw": "{{base_url}}/api/v1/opening-hours",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"opening-hours-service",
 								"api",
 								"v1",
 								"opening-hours"
@@ -99,12 +97,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/opening-hours-service/api/v1/opening-hours/1",
+							"raw": "{{base_url}}/api/v1/opening-hours/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"opening-hours-service",
 								"api",
 								"v1",
 								"opening-hours",
@@ -132,12 +129,11 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base_url}}/location-service/api/v1/location/1",
+							"raw": "{{base_url}}/api/v1/location/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"location-service",
 								"api",
 								"v1",
 								"location",
@@ -162,12 +158,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/location-service/api/v1/location/2",
+							"raw": "{{base_url}}/api/v1/location/2",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"location-service",
 								"api",
 								"v1",
 								"location",
@@ -192,12 +187,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/location-service/api/v1/location/1",
+							"raw": "{{base_url}}/api/v1/location/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"location-service",
 								"api",
 								"v1",
 								"location",
@@ -225,12 +219,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/location-service/api/v1/location",
+							"raw": "{{base_url}}/api/v1/location",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"location-service",
 								"api",
 								"v1",
 								"location"
@@ -254,12 +247,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/location-service/api/v1/location",
+							"raw": "{{base_url}}/api/v1/location",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"location-service",
 								"api",
 								"v1",
 								"location"
@@ -286,16 +278,15 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base_url}}/car-service/api/v1/car/1",
+							"raw": "{{base_url}}/api/v1/car/6276c667b5b3a6787a31d592",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"car-service",
 								"api",
 								"v1",
 								"car",
-								"1"
+								"6276c667b5b3a6787a31d592"
 							]
 						}
 					},
@@ -316,12 +307,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/car-service/api/v1/car/0",
+							"raw": "{{base_url}}/api/v1/car/0",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"car-service",
 								"api",
 								"v1",
 								"car",
@@ -337,12 +327,11 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/car-service/api/v1/car/1",
+							"raw": "{{base_url}}/api/v1/car/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"car-service",
 								"api",
 								"v1",
 								"car",
@@ -371,12 +360,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/car-service/api/v1/car",
+							"raw": "{{base_url}}/api/v1/car",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"car-service",
 								"api",
 								"v1",
 								"car"
@@ -392,7 +380,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"car_status\": \"AVAILABLE\",\n  \"chassis_number\": \"W0L000051T2123456\",\n  \"manufacturer\": \"Audi\",\n  \"construction_year\": \"2022-05-07\",\n  \"color\": \"Black\",\n  \"model\": \"TT\",\n  \"model_series\": \"Coupé\",\n  \"engine_fuel\": \"Diesel\",\n  \"engine_fuel_consumption\": 3.5,\n  \"engine_performance\": 300,\n  \"engine_type\": \"Hybrid\",\n  \"gear_type\": \"automatic\",\n  \"adblue\": false,\n  \"seats\": 2,\n  \"price\": 65000,\n  \"currency_symbol\": \"USD\",\n  \"picture_link\": \"https://www.auto-data.net/en/audi-tt-rs-roadster-8s-facelift-2019-generation-7105#image8\"\n}",
+							"raw": "{\n  \"car_status\": \"AVAILABLE\",\n  \"chassis_number\": \"W0L000051T2123456\",\n  \"manufacturer\": \"BMW\",\n  \"construction_year\": \"2022-05-07\",\n  \"color\": \"Black\",\n  \"model\": \"TT\",\n  \"model_series\": \"Coupé\",\n  \"engine_fuel\": \"Diesel\",\n  \"engine_fuel_consumption\": 3.5,\n  \"engine_performance\": 300,\n  \"engine_type\": \"Hybrid\",\n  \"gear_type\": \"automatic\",\n  \"adblue\": false,\n  \"seats\": 2,\n  \"price\": 65000,\n  \"currency_symbol\": \"USD\",\n  \"picture_link\": \"https://www.auto-data.net/en/audi-tt-rs-roadster-8s-facelift-2019-generation-7105#image8\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -400,12 +388,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/car-service/api/v1/car",
+							"raw": "{{base_url}}/api/v1/car",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"car-service",
 								"api",
 								"v1",
 								"car"
@@ -433,12 +420,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/car-service/api/v1/car/findByStatus",
+							"raw": "{{base_url}}/api/v1/car/findByStatus",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"car-service",
 								"api",
 								"v1",
 								"car",
@@ -459,12 +445,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/order-service/api/v1/order/1",
+							"raw": "{{base_url}}/api/v1/order/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"order-service",
 								"api",
 								"v1",
 								"order",
@@ -489,12 +474,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/order-service/api/v1/order/1",
+							"raw": "{{base_url}}/api/v1/order/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"order-service",
 								"api",
 								"v1",
 								"order",
@@ -510,12 +494,11 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/order-service/api/v1/order/1",
+							"raw": "{{base_url}}/api/v1/order/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"order-service",
 								"api",
 								"v1",
 								"order",
@@ -535,12 +518,11 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base_url}}/order-service/api/v1/order/1/ACTIVE",
+							"raw": "{{base_url}}/api/v1/order/1/ACTIVE",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"order-service",
 								"api",
 								"v1",
 								"order",
@@ -557,12 +539,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/order-service/api/v1/order",
+							"raw": "{{base_url}}/api/v1/order",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"order-service",
 								"api",
 								"v1",
 								"order"
@@ -574,18 +555,130 @@
 				{
 					"name": "create",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIERldGFpbHMiLCJpc3MiOiJDYXIgUmVudGFsIEFwcGxpY2F0aW9uIiwiZXhwIjoxNjUyMDE2OTY4LCJpYXQiOjE2NTIwMDI1NjgsInVzZXJuYW1lIjoiYWRtaW4ifQ.ekqtPBgNLQnqDYfqwywA6w1Ho_f21VVAX8dVMxti6rs",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"car_id\": 1,\n  \"location_of_rental_id\": 1,\n  \"location_of_return_id\": 1,\n  \"date_of_booking\": \"2022-05-08\",\n  \"date_of_rental\": \"2022-05-08\",\n  \"date_of_return\": \"2022-05-08\",\n  \"method_of_payment\": \"DINERS_CLUB\",\n  \"card_number\": \"4274323216727548\",\n  \"card_security_code\": \"976\",\n  \"valid_until\": \"2022-05-08T09:37:43.620Z\",\n  \"first_name\": \"Max\",\n  \"last_name\": \"Schneider\",\n  \"email\": \"max.schneider@outlook.com\",\n  \"order_status\": \"CREATED\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{base_url}}/order-service/api/v1/order",
+							"raw": "{{base_url}}/api/v1/order",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"order-service",
 								"api",
 								"v1",
 								"order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "currency-service",
+			"item": [
+				{
+					"name": "getByAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/currency",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"currency"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBySymbol",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/currency/USD",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"currency",
+								"USD"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "calculate",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "symbolInput",
+									"value": "USD",
+									"type": "text"
+								},
+								{
+									"key": "symbolOutput",
+									"value": "EUR",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "50",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/currency/calculate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"currency",
+								"calculate"
 							]
 						}
 					},
