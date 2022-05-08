@@ -1,0 +1,32 @@
+name: "Currency Service"
+
+env:
+  MICRO_SERVICE: location-service
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - location-service/**
+      - .github/workflows/location-service.yml
+jobs:
+  deploy:
+
+    name: Build and Push Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: 'actions/checkout@v3'
+
+      - id: 'auth'
+        uses: 'google-github-actions/setup-gcloud@v0'
+        with:
+          service_account_key: ${{ secrets.GCR_KEY }}
+
+      - run: gcloud auth configure-docker
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: ${{ env.MICRO_SERVICE }}
+          push: true
+          tags: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}-${{ env.MICRO_SERVICE }}
