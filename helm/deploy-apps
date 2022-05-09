@@ -2,11 +2,13 @@
 
 set -e
 
-helm install configuration-service configuration-service/helm/
-helm install discovery-service discovery-service/helm/
-helm install currency-service currency-service/helm/
-helm install opening-hours-service opening-hours-service/helm/
-helm install location-service location-service/helm/
-helm install car-service car-service/helm/
-helm install order-service order-service/helm/
-helm install api-gateway api-gateway/helm/
+helm upgrade --install --wait configuration-service configuration-service/helm/
+helm upgrade --install --wait discovery-service discovery-service/helm/
+
+
+helm upgrade --install currency-service currency-service/helm/
+helm upgrade --install opening-hours-service opening-hours-service/helm/
+helm upgrade --install location-service location-service/helm/
+helm upgrade --install car-service car-service/helm/
+helm upgrade --install order-service order-service/helm/
+helm upgrade --install api-gateway api-gateway/helm/

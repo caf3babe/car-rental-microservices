@@ -41,12 +41,12 @@ spec:
             httpGet:
               path: /actuator
               port: {{ .Values.service.port }}
-            initialDelaySeconds: 300
+            initialDelaySeconds: 60
           readinessProbe:
             httpGet:
               path: /actuator
               port: {{ .Values.service.port }}
-            initialDelaySeconds: 300
+            initialDelaySeconds: 60
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
