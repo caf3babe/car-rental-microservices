@@ -33,8 +33,8 @@ jobs:
 
       - run: gcloud container clusters get-credentials ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: 'Deploy'
-        uses: 'deliverybot/helm@v1'
+      - name: helm deploy
+        uses: koslib/helm-eks-action@master
         with:
-          chart: ${{ env.MICRO_SERVICE }}
-          atomic: true
+          plugins: "https://github.com/jkroepke/helm-secrets" # optional
+          command: helm upgrade ${{ env.MICRO_SERVICE }} --install --wait ${{ env.MICRO_SERVICE }}/helm
