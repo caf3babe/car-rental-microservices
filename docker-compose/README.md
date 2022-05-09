@@ -54,3 +54,5 @@
 ## Zipkin
 
 * http://localhost:9411/zipkin/
+
+![Zipkin](images/zipkin.png)
