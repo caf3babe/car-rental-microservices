@@ -31,10 +31,10 @@ jobs:
           push: true
           tags: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}-${{ env.MICRO_SERVICE }}
 
-      - run: gcloud container clusters get-credentials ${{ secrets.GCP_PROJECT_ID }} --region europe-west6-b --project car-rental-ui
-
       - name: helm deploy
         uses: koslib/helm-eks-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
           plugins: "https://github.com/jkroepke/helm-secrets" # optional
           command: helm upgrade ${{ env.MICRO_SERVICE }} --install --wait ${{ env.MICRO_SERVICE }}/helm
