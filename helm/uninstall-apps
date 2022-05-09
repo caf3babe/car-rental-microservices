@@ -4,9 +4,14 @@ set -e
 
 helm uninstall configuration-service
 helm uninstall discovery-service
+
+
 helm uninstall currency-service
 helm uninstall opening-hours-service
 helm uninstall location-service
 helm uninstall car-service
 helm uninstall order-service
 helm uninstall api-gateway
+
+
+
