@@ -147,31 +147,39 @@ services:
       - ./logstash:/etc/logstash/conf.d
     ports:
       - "5005:5005"
+
   currency-service:
     build: ../currency-service/.
     ports:
       - "8080:8080"
+    container_name: currency-service
   opening-hours-service:
     build: ../opening-hours-service/.
+    container_name: opening-hours-service
     ports:
       - "8081:8081"
   location-service:
     build: ../location-service/.
+    container_name: location-service
     ports:
       - "8082:8082"
   car-service:
     build: ../car-service/.
+    container_name: car-service
     ports:
       - "8083:8083"
-  order-gateway:
+  order-service:
     build: ../order-service/.
+    container_name: order-service
     ports:
       - "8084:8084"
   authentication-service:
     build: ../authentication-service/.
+    container_name: authentication-service
     ports:
       - "8085:8085"
   api-gateway:
     build: ../api-gateway/.
+    container_name: api-service
     ports:
       - "8079:8079"
