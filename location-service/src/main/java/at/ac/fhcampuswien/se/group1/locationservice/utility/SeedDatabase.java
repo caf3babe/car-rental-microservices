@@ -44,8 +44,8 @@ public class SeedDatabase implements CommandLineRunner {
                         SagaStatus.FINISHED);
         
         Location locationDatasetTwo =
-                new Location(BigInteger.TWO, openingHoursDatasetTwo, "Vienna Centre", "Stephansplatz", "1", "Vienna", 1010,
-                        "stephansplatz@carrentalvienna.com", "06602526284", "44.12037524536211", "18.563466629953894",
+                new Location(BigInteger.TWO, openingHoursDatasetTwo, "Vienna Centre", "Stephansplatz", "6", "Vienna", 1010,
+                        "city-vienna@carrentalvienna.com", "06602526284", "48.20852573292344", "16.374050059536025",
                         SagaStatus.FINISHED);
         
         this.locationRepository.deleteAll();
