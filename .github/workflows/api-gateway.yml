@@ -31,7 +31,7 @@ jobs:
           push: true
           tags: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}-${{ env.MICRO_SERVICE }}
 
-      - run: gcloud container clusters get-credentials ${{ secrets.GCP_PROJECT_ID }} --region europe-west6-b --project=car-rental-ui
+      - run: gcloud container clusters get-credentials ${{ secrets.GCP_PROJECT_ID }} --region europe-west6-b --project car-rental-ui
 
       - name: helm deploy
         uses: koslib/helm-eks-action@master
