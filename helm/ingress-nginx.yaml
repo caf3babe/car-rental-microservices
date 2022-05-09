@@ -5,7 +5,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "v2-ip"
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   rules:
@@ -40,10 +40,52 @@ spec:
                 name: grafana
                 port:
                   number: 3000
-          - path: /api/v1
+          - path: /api/v1/currency
             pathType: Prefix
             backend:
               service:
-                name: api-gateway
+                name: currency-service
                 port:
-                  number: 8079
+                  number: 8080
+          - path: /api/v1/opening-hours
+            pathType: Prefix
+            backend:
+              service:
+                name: opening-hours-service
+                port:
+                  number: 8081
+          - path: /api/v1/location
+            pathType: Prefix
+            backend:
+              service:
+                name: location-service
+                port:
+                  number: 8082
+          - path: /api/v1/car
+            pathType: Prefix
+            backend:
+              service:
+                name: car-service
+                port:
+                  number: 8083
+          - path: /api/v1/auth
+            pathType: Prefix
+            backend:
+              service:
+                name: authentication-service
+                port:
+                  number: 8085
+          - path: /api/v1/order
+            pathType: Prefix
+            backend:
+              service:
+                name: order-service
+                port:
+                  number: 8084
+          - path: /app
+            pathType: Prefix
+            backend:
+              service:
+                name: kibana-kibana
+                port:
+                  number: 5601

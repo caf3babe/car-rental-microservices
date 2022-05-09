@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: gcr.io/car-rental-ui/github.com/dduh96/car-rental-ui-microservices:61a6473ca27a25da6a7e2586b7cbc37231403d98
+          image: gcr.io/car-rental-ui/github.com/dduh96/car-rental-ui-microservices:25591a2764a53e8d01fd407472510cc86c971937
           imagePullPolicy: Always
           ports:
             - containerPort: 80
