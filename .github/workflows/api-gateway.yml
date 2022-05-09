@@ -34,7 +34,7 @@ jobs:
       - run: gcloud container clusters get-credentials ${{ secrets.GCP_PROJECT_ID }}
 
       - name: 'Deploy'
-          uses: 'deliverybot/helm@v1'
-          with:
-            chart: ${{ env.MICRO_SERVICE }}
-            atomic: true
+        uses: 'deliverybot/helm@v1'
+        with:
+          chart: ${{ env.MICRO_SERVICE }}
+          atomic: true
