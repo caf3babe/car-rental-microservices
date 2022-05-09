@@ -30,3 +30,11 @@ jobs:
           context: ${{ env.MICRO_SERVICE }}
           push: true
           tags: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}-${{ env.MICRO_SERVICE }}
+
+      - run: gcloud container clusters get-credentials ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: 'Deploy'
+          uses: 'deliverybot/helm@v1'
+          with:
+            chart: ${{ env.MICRO_SERVICE }}
+            atomic: true
